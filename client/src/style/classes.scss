@@ -14,3 +14,18 @@
     font-weight: 200;
     font-size: 1.9rem;
 }
+
+.base-container {
+    box-shadow: 5px 5px 15px 5px #000000;
+}
+
+
+.base-form {
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+}
+
+.base-input {
+    // width: 85%;
+    height: 5vh;
+}
