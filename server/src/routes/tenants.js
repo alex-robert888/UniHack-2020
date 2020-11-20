@@ -32,6 +32,8 @@ router.put('/update/:pid', function (req, res, next) {
             tenant.phone = req.body.phone;
             tenant.country = req.body.country;
             tenant.city = req.body.city;
+            tenant.date_of_birth = req.body.date_of_birth;
+            tenant.gender = req.body.gender;
             if(req.body.address_id == null) {
                 tenant.address_id = null;
                 console.log("Address null")

@@ -22,7 +22,6 @@ const tenantSchema = new Schema(
         fullname: {
             type: String
         },
-
         phone: {
             type: Number
         },
@@ -30,6 +29,12 @@ const tenantSchema = new Schema(
             type: String
         },
         city: {
+            type: String
+        },
+        date_of_birth: {
+            type: String
+        },
+        gender:{
             type: String
         },
         address_id: {
