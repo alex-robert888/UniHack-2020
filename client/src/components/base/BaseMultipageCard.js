@@ -1,7 +1,8 @@
 import './BaseMultipageCard.scss';
 import '../../style/classes.scss';
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 import BaseMultipageCardDots from './BaseMultipageCardDots';
+import BaseInputText from './BaseInputText';
 
 const BaseMultipageCard = (props) => {
     let [currentPage, setCurrentPage] = useState(1);
@@ -25,7 +26,15 @@ const BaseMultipageCard = (props) => {
 
                 <div className='dots'>
                     <BaseMultipageCardDots no_pages={props.numberOfPages} selected_page={currentPage} />
-                </div>    
+                </div>   
+                
+                {/* <Fragment>
+                    <form>
+                        <BaseInputText title='full name' type='text' />
+                        <BaseInputText title='email' type='email' />
+                        <BaseInputText title='telephone' type='text' />
+                    </form>
+                </Fragment> */}
             </div>
             
         </article>
