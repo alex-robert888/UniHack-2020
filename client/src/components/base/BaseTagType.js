@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import './BaseInputRadioButtons.scss';
 import '../../style/classes.scss';
 
