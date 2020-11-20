@@ -1,6 +1,8 @@
 import './BaseMultipageCard.scss';
+import '../../style/classes.scss';
 
-const BaseMultipageCard = () => {
+
+const BaseMultipageCard = ({numberOfPages, }) => {
     return (
         <article className='base-multipage-card'>
             
