@@ -3,14 +3,53 @@
 @import './variables/_proportions';
 
 
-.page {
+.glb-page {
     padding: 0 $page-horizontal-padding;
     background-color: $base-white;
     box-sizing: border-box;
     width: 100%;
 }
 
-.h2 {
+.glb-h2 {
     font-weight: 200;
     font-size: 1.9rem;
+}
+
+.glb-base-container {
+    box-shadow: 5px 5px 15px 5px #000000;
+}
+
+.glb-base-form {
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+}
+
+.glb-base-input {
+    // width: 85%;
+    height: 4.5vh;
+}
+
+.glb-base-input-component {
+    display: flex;
+    flex-direction: column;
+}
+
+.glb-base-outlined-button {
+    width: 7.5vw;
+    height: 4.5vh;
+    border: 1px solid $base-green;
+    outline: none;
+    background-color: $base-white;
+}
+
+.glb-base-filled-button {
+    width: 7.5vw;
+    height: 4.5vh;
+    border: none;
+    outline: none;
+    background-color: $base-green;
+}
+
+.glb-base-label {
+    text-transform: uppercase;
 }

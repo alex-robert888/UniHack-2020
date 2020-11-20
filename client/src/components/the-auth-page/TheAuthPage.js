@@ -7,7 +7,7 @@ import TheSignupForm from '../the-auth-page/TheSignupForm';
 
 const TheAuthPage = () => {
     return (
-        <section id='the-auth-page' className='page'>
+        <section id='the-auth-page' className='glb-page'>
             <section id="the-auth-page-left-side">
                 <Switch>
                     <Route path='/auth/login' component={TheLoginForm} />

@@ -1,0 +1,7 @@
+<svg id="lock-icon" xmlns="http://www.w3.org/2000/svg" width="24.669" height="24.669" viewBox="0 0 24.669 24.669">
+  <g id="Group_5" data-name="Group 5">
+    <path id="Path_3" data-name="Path 3" d="M171,241v5.782h8.191V241Zm4.818,3.614a.723.723,0,1,1-1.445,0v-1.445a.723.723,0,0,1,1.445,0Z" transform="translate(-162.761 -229.388)" fill="#40ffb3"/>
+    <path id="Path_4" data-name="Path 4" d="M12.335,0A12.335,12.335,0,1,0,24.669,12.335,12.349,12.349,0,0,0,12.335,0Zm5.541,18.116a.723.723,0,0,1-.723.723H7.516a.723.723,0,0,1-.723-.723V10.889a.723.723,0,0,1,.723-.723h.241V9.444a4.577,4.577,0,1,1,9.155,0v.723h.241a.723.723,0,0,1,.723.723Z" transform="translate(0 0)" fill="#40ffb3"/>
+    <path id="Path_5" data-name="Path 5" d="M197.264,134.132a3.132,3.132,0,0,0-6.264,0v.723h6.264Z" transform="translate(-181.797 -124.688)" fill="#40ffb3"/>
+  </g>
+</svg>
