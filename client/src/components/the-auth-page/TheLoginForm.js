@@ -12,12 +12,17 @@ const TheLoginForm = () => {
             <BaseInputText title='password' type='password' />
         </form>
     </Fragment>
+    
   ])
+
+  function loadDataToContext() {
+    alert('log in..')
+  }
 
     return (
         <section id='the-login-form'>
           <h2 className='glb-h2'>Welcome back!</h2>  
-          <BaseMultipageCard numberOfPages={1} listPages={listForms}/>
+          <BaseMultipageCard numberOfPages={1} listPages={listForms} buttonFinishPressed={() => loadDataToContext()} />
         </section>
     );
 }

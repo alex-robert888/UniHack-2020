@@ -19,12 +19,10 @@ const landlordSchema = new Schema(
             required: true,
             minlength: 6
         },
-        first_name: {
+        fullname: {
             type: String
         },
-        last_name: {
-            type: String
-        },
+
         phone: {
             type: Number
         },

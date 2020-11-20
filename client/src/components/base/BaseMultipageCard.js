@@ -18,7 +18,7 @@ const BaseMultipageCard = (props) => {
 
             <div class='base-multipage-card-footer'>
                 {currentPage === props.numberOfPages ? (
-                    <button className="glb-base-filled-button">Enter</button>
+                    <button className="glb-base-filled-button" onClick={() => props.buttonFinishPressed()}>Enter</button>
                 ) : (
                     <button className="glb-base-outlined-button" onClick={onClickContinueButton}>Continue</button>
                 )}
