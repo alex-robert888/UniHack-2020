@@ -11,7 +11,7 @@ const BaseSenderDescription = (props) => { // userType(Tenant,Landlord,...), nam
         <article className="base-sender-description">
             <span className="span-message">From:</span>
             <span className="span-name entity">{props.name}</span>
-            <img src={process.env.PUBLIC_URL + props.imgName} alt="profile-pic" className="entity profile-pic"/>
+            <img src={process.env.PUBLIC_URL + "/userImages/" + props.imgName} alt="profile-pic" className="entity profile-pic"/>
             <div className="entity">
                 <BaseTagType tag={props.userType}></BaseTagType>
             </div>

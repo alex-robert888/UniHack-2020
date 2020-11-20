@@ -1,0 +1,36 @@
+@import '../../style/variables/colours';
+@import '../../style/variables/_proportions';
+
+.article-section{
+    display: flex;
+    flex-direction: column;
+    min-width: fit-content;
+}
+
+.top-section{
+    margin: 2vh auto;
+}
+
+.top-section-head{
+    font-weight: 500;
+    -ms-flex-align: center;
+    margin: auto 0.5vw;
+}
+
+.top-section-price{
+    font-weight: 500;
+}
+
+.bottom-section{
+    display: flex;
+    margin: auto;
+}
+
+.reject-button{
+    margin: auto 1vw;
+}
+
+.reject-button:hover{
+    opacity: 0.8;
+    cursor: pointer;
+}
