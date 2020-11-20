@@ -13,6 +13,7 @@
 .glb-h2 {
     font-weight: 200;
     font-size: 1.9rem;
+    margin-bottom: 2vh; 
 }
 
 .glb-base-container {
@@ -35,19 +36,32 @@
 }
 
 .glb-base-outlined-button {
-    width: 7.5vw;
-    height: 4.5vh;
-    border: 1px solid $base-green;
+    width: 8.5vw;
+    height: 5.5vh;
+    //border: 1px solid $base-green;
+    border: 2px solid $base-green;
     outline: none;
     background-color: $base-white;
+    color: $base-green;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.2rem;
+    font-size: 1.1rem;
 }
 
 .glb-base-filled-button {
-    width: 7.5vw;
-    height: 4.5vh;
+    width: 8.5vw;
+    height: 5.5vh;
     border: none;
     outline: none;
     background-color: $base-green;
+    color: $base-white;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.2rem;
+    font-size: 1.1rem;
 }
 
 .glb-base-label {
@@ -55,4 +69,8 @@
     font-size: 1.3rem;
     font-weight: 400;
     margin-bottom: 0.5rem;
+}
+
+.base-multipage-card-footer {
+    margin-top: 2vh;
 }

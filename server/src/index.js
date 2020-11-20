@@ -4,7 +4,7 @@ const cors = require('cors');
 const volleyball = require('volleyball');
 const mongoose = require('mongoose');
 
-require('dotenv').config();
+//require('dotenv').config();
 
 // Init express application
 const app = express();
