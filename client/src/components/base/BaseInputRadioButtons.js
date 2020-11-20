@@ -2,10 +2,11 @@ import { useState } from 'react';
 import './BaseInputRadioButtons.scss';
 import '../../style/classes.scss';
 
-const BaseInputRadioButtons = ({title, listOfOptions}) => {
+const BaseInputRadioButtons = ({title, listOfOptions, valueUpdated}) => {
     //<BaseInputRadioButtons title="Type of account" listOfOptions={['Tenant','Landlord','Contractor']}></BaseInputRadioButtons>
-    const [selectedOpt, setSelectedOpt] = useState('');
-
+    function onChangeHandler(event) {
+        valueUpdated(event.target.value);
+    }
     return (
         <article className='base-input-radio-button-page'>
             <label htmlFor='input-radio' className='glb-base-label base-input-radio-title'>{title}</label>
@@ -18,7 +19,8 @@ const BaseInputRadioButtons = ({title, listOfOptions}) => {
                         className='base-input-radio-button-input' 
                         value={option} 
                         text={option}
-                        onChange={event => {setSelectedOpt(event.target.value)}}/>
+                        onChange={ onChangeHandler } 
+                    />
                     <span>{option}</span>
                 </label>
                 )
