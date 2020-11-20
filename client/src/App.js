@@ -1,10 +1,14 @@
-import './App.scss';
 
+import './App.scss';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+ 
 const App = () => {
   return (
-    <div className='App'>
-      <h1>fffff</h1>
-    </div>
+    <Router>
+      <div className='App'>
+        
+      </div>
+    </Router>
   );
 }
 
