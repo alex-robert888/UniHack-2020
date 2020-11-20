@@ -65,4 +65,12 @@ router.post('/add', async function(req, res, next){
         .catch(err => next(err));
 });
 
+router.delete('/delete/:pid',
+    (req, res, next) => {
+        Address.deleteOne( {"public_id": req.params.pid} )
+            .then(addresses => res.json('Address deleted'))
+            .catch(err => next(err));
+    }
+);
+
 module.exports = router;
