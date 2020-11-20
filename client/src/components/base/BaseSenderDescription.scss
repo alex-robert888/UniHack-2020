@@ -2,9 +2,16 @@
     display: flex;
 }
 
+.profile-pic{
+    border-radius: 50%;
+}
+
 .span-message{
     font-weight: 500;
-    vertical-align: bottom;
+}
+
+.span-name{
+    font-weight: 300;
 }
 
 .entity{ // space them out
