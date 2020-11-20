@@ -8,8 +8,8 @@ const TheLoginForm = () => {
   let [listForms, setListForms] = useState([
     <Fragment>
         <form>
-            <BaseInputText title='email' type='text' />
-            <BaseInputText title='password' type='email' />
+            <BaseInputText title='email' type='email' />
+            <BaseInputText title='password' type='password' />
         </form>
     </Fragment>
   ])
