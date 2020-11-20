@@ -1,0 +1,30 @@
+@import '../../style/variables/colours';
+
+.base-input-radio-button-page{
+
+}
+
+.base-input-radio-title{
+    display: block;
+}
+
+.base-input-radio-section{
+    margin: auto 1.5vw;
+}
+
+.base-input-radio-button-input{
+    margin-right: 0.7vw;
+    cursor: pointer;
+    background: $base-green;
+    border-radius: 50%;
+}
+
+.base-input-radio-label{
+    background-color: green;
+    display: block;
+    span{
+        cursor: pointer;
+        user-select: none;
+    }
+}
+
