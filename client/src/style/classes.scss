@@ -3,33 +3,38 @@
 @import './variables/_proportions';
 
 
-.page {
+.glb-page {
     padding: 0 $page-horizontal-padding;
     background-color: $base-white;
     box-sizing: border-box;
     width: 100%;
 }
 
-.h2 {
+.glb-h2 {
     font-weight: 200;
     font-size: 1.9rem;
 }
 
-.base-container {
+.glb-base-container {
     box-shadow: 5px 5px 15px 5px #000000;
 }
 
-.base-form {
+.glb-base-form {
     padding: 0 1.5rem;
     box-sizing: border-box;
 }
 
-.base-input {
+.glb-base-input {
     // width: 85%;
     height: 4.5vh;
 }
 
-.base-outlined-button {
+.glb-base-input-component {
+    display: flex;
+    flex-direction: column;
+}
+
+.glb-base-outlined-button {
     width: 7.5vw;
     height: 4.5vh;
     border: 1px solid $base-green;
@@ -37,7 +42,7 @@
     background-color: $base-white;
 }
 
-.base-filled-button {
+.glb-base-filled-button {
     width: 7.5vw;
     height: 4.5vh;
     border: none;
@@ -45,6 +50,6 @@
     background-color: $base-green;
 }
 
-.base-label {
+.glb-base-label {
     text-transform: uppercase;
 }

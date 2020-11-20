@@ -4,7 +4,7 @@ import logo from '../../assets/img/logo.svg';
 
 const TheHeader = () => {
     return (
-        <header className='the-header page'>
+        <header className='the-header glb-page'>
             <img src={logo} alt="" class="logo" />
         </header>
     );
