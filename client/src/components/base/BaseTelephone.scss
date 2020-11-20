@@ -7,14 +7,14 @@
     display: inline-block;
   }
   
-.tooltip .tooltiptext {
+.tooltip .tooltip-text {
     visibility: hidden;
     width: 120px;
     background-color: #555;
     color: #fff;
     text-align: center;
     border-radius: 6px;
-    padding: 5px 0;
+    padding: 4px 0;
     position: absolute;
     z-index: 1;
     bottom: 125%;
@@ -24,7 +24,7 @@
     transition: opacity 0.3s;
 }
   
-.tooltip .tooltiptext::after {
+.tooltip .tooltip-text::after {
     content: "";
     position: absolute;
     top: 100%;
@@ -35,7 +35,7 @@
     border-color: #555 transparent transparent transparent;
 }
   
-.tooltip:hover .tooltiptext {
+.tooltip:hover .tooltip-text {
     visibility: visible;
     opacity: 1;
 }

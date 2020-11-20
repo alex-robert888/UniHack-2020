@@ -15,7 +15,7 @@ const BaseTagType = (props) => { // props.tag
         tag_class = 'contractor_tag'; // default case
     }
     tag_class += " tag";
-    console.log(tag_class);
+
     return (
         <article>
             <label className={tag_class}>
