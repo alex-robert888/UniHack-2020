@@ -19,7 +19,6 @@
     box-shadow: 5px 5px 15px 5px #000000;
 }
 
-
 .base-form {
     padding: 0 1.5rem;
     box-sizing: border-box;
@@ -27,5 +26,21 @@
 
 .base-input {
     // width: 85%;
-    height: 5vh;
+    height: 4.5vh;
+}
+
+.base-outlined-button {
+    width: 7.5vw;
+    height: 4.5vh;
+    border: 1px solid $base-green;
+    outline: none;
+    background-color: $base-white;
+}
+
+.base-filled-button {
+    width: 7.5vw;
+    height: 4.5vh;
+    border: none;
+    outline: none;
+    background-color: $base-green;
 }
