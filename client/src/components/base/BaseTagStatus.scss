@@ -1,0 +1,19 @@
+@import '../../style/variables/colours';
+
+.tag-box {
+    text-align: center;
+    width: 8.5vw;
+    height: 5.5vh;
+    font-weight: 600;
+    letter-spacing: 0.12rem;
+    font-size: 1.1rem;
+}
+
+.tag-pending{
+    color: $base-white;
+    background-color: $base-orange;
+}
+
+.tag-solved{
+    $base-green: #40FFB3;
+}

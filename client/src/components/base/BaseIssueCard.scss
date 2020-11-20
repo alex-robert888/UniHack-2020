@@ -1,0 +1,60 @@
+@import '../../style/variables/colours';
+@import '../../style/classes.scss';
+
+.issue-card{
+    padding: 2vh 2vw;
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    width: 90%;
+}
+
+.issue-card-left{
+    display: flex;
+    flex-direction: column;
+}
+
+.issue-card-right{
+    display: flex;
+    flex-direction: column;
+}
+
+.issue-posted{
+    margin-bottom: 1vh;    
+}
+
+.issue-posted-text{
+    margin-right: 0.5vw;
+    font-weight: lighter;
+}
+
+.issue-posted-date{
+    font-weight: lighter;
+}
+
+.issue-title{
+    margin-bottom: 1vh;
+    font-weight: 600;
+    letter-spacing: 0.07rem;
+}
+
+.issue-description{
+    margin-bottom: 1vh;
+}
+
+.issue-expand{
+    color: $base-green;
+    font-weight: 600;
+    letter-spacing: 0.07rem;
+    user-select: none;
+    cursor: pointer;
+}
+
+.issue-tag{
+
+}
+
+.issue-button{
+    
+}
+
