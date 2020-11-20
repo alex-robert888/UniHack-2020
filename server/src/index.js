@@ -2,6 +2,9 @@
 const express = require('express');
 const cors = require('cors');
 const volleyball = require('volleyball');
+const mongoose = require('mongoose');
+
+require('dotenv').config();
 
 // Init express application
 const app = express();
@@ -20,6 +23,12 @@ const loginModule = require('./auth/login');
 const signupModule = require('./auth/signup');
 app.use('/auth/login', loginModule);
 app.use('/auth/signup', signupModule);
+
+//Initialize mongoose
+const url = "mongodb+srv://Bizso:TriduckForce@cluster0.obexd.mongodb.net/<dbname>?retryWrites=true&w=majority";
+mongoose.connect(url, { newUserParser: true, userCreateIndex: true});
+const connection = mongoose.connection;
+connection.once('open', () => console.log("MongoDB database established"))
 
 // Handle errors forwarded by requests
 app.use((err, req, res, next) => {
