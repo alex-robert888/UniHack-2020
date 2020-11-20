@@ -21,8 +21,16 @@ app.get('/', (req, res) => {
 
 const loginModule = require('./auth/login');
 const signupModule = require('./auth/signup');
+const tenantsModule = require('./routes/tenants');
+const landlordsModule = require('./routes/landlords');
+const contractorsModule = require('./routes/contractors');
+const addressesModule = require('./routes/addresses');
 app.use('/auth/login', loginModule);
 app.use('/auth/signup', signupModule);
+app.use('/routes/tenants', tenantsModule);
+app.use('/routes/landlords', landlordsModule);
+app.use('/routes/contractors', contractorsModule);
+app.use('/routes/addresses', addressesModule);
 
 //Initialize mongoose
 const url = "mongodb+srv://Bizso:TriduckForce@cluster0.obexd.mongodb.net/<dbname>?retryWrites=true&w=majority";
