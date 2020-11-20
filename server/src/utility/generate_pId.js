@@ -5,7 +5,7 @@ function generate_public_id(type) {
     Output: the generated id
     */
     var public_id = "";
-    var possible_types = ["t", "l", "c"]
+    var possible_types = ["t", "l", "c", "a", "i", "n"]
     if(!possible_types.includes(type)){
         console.log("Invalid type");
     }

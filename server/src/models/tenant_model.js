@@ -35,7 +35,7 @@ const tenantSchema = new Schema(
             type: String
         },
         address_id: {
-            type: Number,
+            type: String,
             default: null
         }
     },

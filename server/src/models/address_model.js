@@ -4,6 +4,10 @@ const Schema = mongoose.Schema;
 
 const addressSchema = new Schema(
     {
+        public_id: {
+            type: String,
+            required: true
+        },
         country: {
             type: String,
             required: true
