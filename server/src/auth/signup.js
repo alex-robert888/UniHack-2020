@@ -1,6 +1,8 @@
 
 const express = require('express');
 const Tenant = require('../models/tenant_model');
+const Landlord = require('../models/landlord_model');
+const Contractor = require('../models/contractor_model');
 
 const router = express.Router();
 
@@ -23,7 +25,17 @@ router.post('/tenant', (req, res, next) => {
     const country = req.body.country;
     const city = req.body.city;
     const address_id = null;
-    const newTenant = new Tenant({ public_id, email, password, first_name, last_name, phone, country, city, address_id });
+    const newTenant = new Tenant({
+        "public_id": public_id,
+        "email": email,
+        "password:": password,
+        "first_name": first_name,
+        "last_name": last_name,
+        "phone": phone,
+        "country": country,
+        "city": city,
+        "address_id": null
+    });
     newTenant.save()
         .then(() => res.json({
             status: 'Tenant signup ✅'
@@ -33,15 +45,72 @@ router.post('/tenant', (req, res, next) => {
 });
 
 router.post('/landlord', (req, res, next) => {
-    res.json({
-        status: 'Landlord signup ✅'
-    }) 
+    var exists = true;
+    var new_pid;
+    while(exists){
+        new_pid = generate_pid("l");
+        exists = (Landlord.count( {"public_id" : new_pid} ) > 0);
+    }
+
+    const public_id = new_pid;
+    const email = req.body.email;
+    const password = req.body.password;
+    const first_name = req.body.first_name;
+    const last_name = req.body.last_name;
+    const phone = req.body.phone;
+    const country = req.body.country;
+    const city = req.body.city;
+    const newLandlord = new Landlord({ 
+        "public_id": public_id,
+        "email": email,
+        "password:": password,
+        "first_name": first_name,
+        "last_name": last_name,
+        "phone": phone,
+        "country": country,
+        "city": city
+    });
+    newLandlord.save()
+        .then(() => res.json({
+            status: 'Landlord signup ✅'
+            })  
+        )
+        .catch(err => next(err));
  });
 
  router.post('/contractor', (req, res, next) => {
-    res.json({
-        status: 'Contractor signup ✅'
-    }) 
+    var exists = true;
+    var new_pid;
+    while(exists){
+        new_pid = generate_pid("c");
+        exists = (Contractor.count( {"public_id" : new_pid} ) > 0);
+    }
+
+    const public_id = new_pid;
+    const email = req.body.email;
+    const password = req.body.password;
+    const first_name = req.body.first_name;
+    const last_name = req.body.last_name;
+    const phone = req.body.phone;
+    const country = req.body.country;
+    const city = req.body.city;
+
+    const newContractor = new Contractor({ 
+        "public_id": public_id,
+        "email": email,
+        "password": password,
+        "first_name": first_name,
+        "last_name": last_name,
+        "phone": phone,
+        "country": country,
+        "city": city
+    });
+    newContractor.save()
+        .then(() => res.json({
+            status: 'Contractor signup ✅'
+            })  
+        )
+        .catch(err => next(err));
  });
 
  module.exports = router;
