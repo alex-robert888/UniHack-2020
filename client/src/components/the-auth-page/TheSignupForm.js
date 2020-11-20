@@ -27,7 +27,6 @@ const TheSignupForm = () => {
     let [telephone, setTelephone] = useState('');
     let [gender, setGender] = useState('');
     let [dateOfBirth, setDateOfBirth] = useState('');
-    let [username, setUsername] = useState('');
     let [password, setPassword] = useState('');
     let [confirmedPassword, setConfirmedPassword] = useState('');
     let [country, setCountry] = useState('');
@@ -58,8 +57,7 @@ const TheSignupForm = () => {
                 country: country,
                 city: city,
                 gender: gender,
-                dateOfBirth: dateOfBirth,
-                username: username,
+                date_of_birth: dateOfBirth,
                 password: password
             })
         }
@@ -87,7 +85,6 @@ const TheSignupForm = () => {
         </Fragment>,
         <Fragment>
             <form>
-                <BaseInputText title='username' type='text' valueUpdated={ username => setUsername(username) } />
                 <BaseInputText title='password' type='password' valueUpdated={ password => setPassword(password) } />
                 <BaseInputText title='confirm password' type='password' valueUpdated={ confirmedPassword => setConfirmedPassword(confirmedPassword) } />
             </form>
