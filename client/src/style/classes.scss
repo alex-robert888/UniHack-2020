@@ -1,0 +1,16 @@
+
+@import './variables/_colours';
+@import './variables/_proportions';
+
+
+.page {
+    padding: 0 $page-horizontal-padding;
+    background-color: $base-white;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.h2 {
+    font-weight: 200;
+    font-size: 1.9rem;
+}

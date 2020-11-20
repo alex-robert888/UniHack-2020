@@ -1,0 +1,16 @@
+
+@import '../../style/variables/proportions';
+
+#the-auth-page {
+    height: $height-minus-the-header;
+    display: flex;
+    align-items: center;
+}
+
+#the-auth-page-right-side { 
+    margin-left: auto;
+
+    > img {
+        width: 29vw;
+    }
+}
