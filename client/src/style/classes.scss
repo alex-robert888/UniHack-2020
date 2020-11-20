@@ -26,7 +26,7 @@
 
 .glb-base-input {
     // width: 85%;
-    height: 4.5vh;
+    height: 5.5vh;
 }
 
 .glb-base-input-component {
@@ -52,4 +52,7 @@
 
 .glb-base-label {
     text-transform: uppercase;
+    font-size: 1.3rem;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
 }
