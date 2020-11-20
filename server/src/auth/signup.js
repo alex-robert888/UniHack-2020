@@ -19,8 +19,7 @@ router.post('/tenant', (req, res, next) => {
     const public_id = new_pid;
     const email = req.body.email;
     const password = req.body.password;
-    const first_name = req.body.first_name;
-    const last_name = req.body.last_name;
+    const fullname = req.body.first_name;
     const phone = req.body.phone;
     const country = req.body.country;
     const city = req.body.city;
@@ -28,9 +27,8 @@ router.post('/tenant', (req, res, next) => {
     const newTenant = new Tenant({
         "public_id": public_id,
         "email": email,
-        "password:": password,
-        "first_name": first_name,
-        "last_name": last_name,
+        "password": password,
+        "fullname": fullname,
         "phone": phone,
         "country": country,
         "city": city,
@@ -55,17 +53,15 @@ router.post('/landlord', (req, res, next) => {
     const public_id = new_pid;
     const email = req.body.email;
     const password = req.body.password;
-    const first_name = req.body.first_name;
-    const last_name = req.body.last_name;
+    const fullname = req.body.fullname;
     const phone = req.body.phone;
     const country = req.body.country;
     const city = req.body.city;
     const newLandlord = new Landlord({ 
         "public_id": public_id,
         "email": email,
-        "password:": password,
-        "first_name": first_name,
-        "last_name": last_name,
+        "password": password,
+        "fullname": fullname, 
         "phone": phone,
         "country": country,
         "city": city
@@ -89,8 +85,7 @@ router.post('/landlord', (req, res, next) => {
     const public_id = new_pid;
     const email = req.body.email;
     const password = req.body.password;
-    const first_name = req.body.first_name;
-    const last_name = req.body.last_name;
+    const fullname = req.body.first_name;
     const phone = req.body.phone;
     const country = req.body.country;
     const city = req.body.city;
@@ -99,11 +94,10 @@ router.post('/landlord', (req, res, next) => {
         "public_id": public_id,
         "email": email,
         "password": password,
-        "first_name": first_name,
-        "last_name": last_name,
+        "fullname": fullname,
         "phone": phone,
         "country": country,
-        "city": city
+        "city": city,
     });
     newContractor.save()
         .then(() => res.json({

@@ -54,10 +54,7 @@ const contractorSchema = new Schema(
             required: true,
             minlength: 6
         },
-        first_name: {
-            type: String
-        },
-        last_name: {
+        fullname: {
             type: String
         },
         phone: {
