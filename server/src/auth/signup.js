@@ -28,7 +28,7 @@ router.post('/tenant', (req, res, next) => {
     const newTenant = new Tenant({
         "public_id": public_id,
         "email": email,
-        "password:": password,
+        "password": password,
         "first_name": first_name,
         "last_name": last_name,
         "phone": phone,
@@ -63,7 +63,7 @@ router.post('/landlord', (req, res, next) => {
     const newLandlord = new Landlord({ 
         "public_id": public_id,
         "email": email,
-        "password:": password,
+        "password": password,
         "first_name": first_name,
         "last_name": last_name,
         "phone": phone,
