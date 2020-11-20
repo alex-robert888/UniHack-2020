@@ -23,6 +23,8 @@ router.post('/tenant', (req, res, next) => {
     const phone = req.body.phone;
     const country = req.body.country;
     const city = req.body.city;
+    const date_of_birth = req.body.date_of_birth;
+    const gender = req.body.gender;
     const address_id = null;
     const newTenant = new Tenant({
         "public_id": public_id,
@@ -32,6 +34,8 @@ router.post('/tenant', (req, res, next) => {
         "phone": phone,
         "country": country,
         "city": city,
+        "date_of_birth": date_of_birth,
+        "gender": gender,
         "address_id": null
     });
     newTenant.save()
@@ -57,6 +61,8 @@ router.post('/landlord', (req, res, next) => {
     const phone = req.body.phone;
     const country = req.body.country;
     const city = req.body.city;
+    const date_of_birth = req.body.date_of_birth;
+    const gender = req.body.gender;
     const newLandlord = new Landlord({ 
         "public_id": public_id,
         "email": email,
@@ -64,7 +70,9 @@ router.post('/landlord', (req, res, next) => {
         "fullname": fullname, 
         "phone": phone,
         "country": country,
-        "city": city
+        "city": city,
+        "date_of_birth": date_of_birth,
+        "gender": gender,
     });
     newLandlord.save()
         .then(() => res.json({
@@ -89,7 +97,8 @@ router.post('/landlord', (req, res, next) => {
     const phone = req.body.phone;
     const country = req.body.country;
     const city = req.body.city;
-
+    const date_of_birth = req.body.date_of_birth;
+    const gender = req.body.gender;
     const newContractor = new Contractor({ 
         "public_id": public_id,
         "email": email,
@@ -98,6 +107,8 @@ router.post('/landlord', (req, res, next) => {
         "phone": phone,
         "country": country,
         "city": city,
+        "date_of_birth": date_of_birth,
+        "gender": gender,
     });
     newContractor.save()
         .then(() => res.json({

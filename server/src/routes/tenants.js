@@ -21,6 +21,8 @@ router.get('/getbypid/:pid',
 );
 
 router.put('/update/:pid', function (req, res, next) {
+        var tenant = null;
+        var address = null;
         Tenant.findOne({ public_id: req.params.pid })
         .then(tenant => {
             tenant.email = req.body.email;
@@ -30,6 +32,8 @@ router.put('/update/:pid', function (req, res, next) {
             tenant.phone = req.body.phone;
             tenant.country = req.body.country;
             tenant.city = req.body.city;
+            tenant.date_of_birth = req.body.date_of_birth;
+            tenant.gender = req.body.gender;
             if(req.body.address_id == null) {
                 tenant.address_id = null;
                 console.log("Address null")
@@ -46,15 +50,15 @@ router.put('/update/:pid', function (req, res, next) {
                         else{
                             console.log("Address not found");
                         }
+
+                        tenant.save()
+                        .then(() => res.json('Tenant updated'))
+                        .catch(err => next(err));
+                        console.log(tenant);
                     }
                 )
                 .catch(err => next(err));
             }
-            
-            tenant.save()
-                    .then(() => res.json('Tenant updated'))
-                    .catch(err => next(err));
-            console.log(tenant);
         })
         .catch(err => next(err));
 })

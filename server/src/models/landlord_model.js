@@ -22,7 +22,6 @@ const landlordSchema = new Schema(
         fullname: {
             type: String
         },
-
         phone: {
             type: Number
         },
@@ -31,7 +30,13 @@ const landlordSchema = new Schema(
         },
         city: {
             type: String
-        }
+        },
+        date_of_birth: {
+            type: String
+        },
+        gender:{
+            type: String
+        },
     },
     {
         timestamps: true

@@ -66,6 +66,12 @@ const contractorSchema = new Schema(
         city: {
             type: String
         },
+        date_of_birth: {
+            type: String
+        },
+        gender:{
+            type: String
+        },
         specializations: {
             type: [String]
         },
