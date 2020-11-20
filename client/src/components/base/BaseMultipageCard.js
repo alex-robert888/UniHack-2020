@@ -14,8 +14,7 @@ const BaseMultipageCard = (props) => {
 
     return (
         <article className='base-multipage-card'>
-            <div className="form-placeholder">                
-            </div>
+            { props.listPages[currentPage - 1] }
 
             <div class='base-multipage-card-footer'>
                 {currentPage === props.numberOfPages ? (
@@ -28,13 +27,7 @@ const BaseMultipageCard = (props) => {
                     <BaseMultipageCardDots no_pages={props.numberOfPages} selected_page={currentPage} />
                 </div>   
                 
-                {/* <Fragment>
-                    <form>
-                        <BaseInputText title='full name' type='text' />
-                        <BaseInputText title='email' type='email' />
-                        <BaseInputText title='telephone' type='text' />
-                    </form>
-                </Fragment> */}
+                
             </div>
             
         </article>
