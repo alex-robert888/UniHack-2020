@@ -6,8 +6,8 @@ const TheSignupForm = () => {
     return (
         <div className='the-signup-form'>
             <h2 className='glb-h2'>Create a new account!</h2>
-            {/* <BaseMultipageCard /> */}
-            <BaseInputText title='full name' type='text' />
+            <BaseMultipageCard numberOfPages={3} />
+            {/* <BaseInputText title='full name' type='text' /> */}
         </div>
     );
 }

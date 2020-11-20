@@ -6,7 +6,7 @@ const TheLoginForm = () => {
     return (
         <section id='the-login-form'>
           <h2 className='glb-h2'>Welcome back!</h2>  
-          <BaseMultipageCard />
+          <BaseMultipageCard numberOfPages={1}/>
         </section>
     );
 }
