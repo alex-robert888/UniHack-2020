@@ -1,8 +1,8 @@
 import './BaseMultipageCard.scss';
 import '../../style/classes.scss';
-import { useState, Fragment } from 'react';
+import { useState } from 'react';
 import BaseMultipageCardDots from './BaseMultipageCardDots';
-import BaseInputText from './BaseInputText';
+
 
 const BaseMultipageCard = (props) => {
     let [currentPage, setCurrentPage] = useState(1);
@@ -18,7 +18,7 @@ const BaseMultipageCard = (props) => {
 
             <div class='base-multipage-card-footer'>
                 {currentPage === props.numberOfPages ? (
-                    <button className="glb-base-filled-button">Finish</button>
+                    <button className="glb-base-filled-button">Enter</button>
                 ) : (
                     <button className="glb-base-outlined-button" onClick={onClickContinueButton}>Continue</button>
                 )}
@@ -26,8 +26,6 @@ const BaseMultipageCard = (props) => {
                 <div className='dots'>
                     <BaseMultipageCardDots no_pages={props.numberOfPages} selected_page={currentPage} />
                 </div>   
-                
-                
             </div>
             
         </article>

@@ -9,12 +9,14 @@ const ThreeDots = (props) => { // props: no_pages, selected_page
     }
     vec[props.selected_page - 1] = 1;
     return (
+        (props.no_pages > 1 && 
         <article className='threeDots'>
             {vec.map(bit => (
                 <img className='dot' src={bit === 1 ? filledDot : emptyDot} alt={bit === 1 ? "filled_dot" : "empty_dot"} />
             ))
             }
         </article>
+        )
     );
 }
 

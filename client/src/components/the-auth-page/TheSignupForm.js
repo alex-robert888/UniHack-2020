@@ -2,6 +2,7 @@ import './TheSignupForm.scss';
 import BaseMultipageCard from '../base/BaseMultipageCard';
 import BaseInputText from '../base/BaseInputText';
 import { Fragment, useState } from 'react';
+import '../../style/classes.scss'
 
 const TheSignupForm = () => {
     let [listForms, setListForms] = useState([
@@ -15,7 +16,7 @@ const TheSignupForm = () => {
         <Fragment>
             <form>
                 <BaseInputText title='gender' type='text' />
-                <BaseInputText title='date of birth' type='text' />
+                <BaseInputText title='date of birth' type='date' />
             </form>
         </Fragment>,
         <Fragment>
@@ -25,9 +26,7 @@ const TheSignupForm = () => {
                 <BaseInputText title='confirm password' type='text' />
             </form>
         </Fragment>
-
-    ]
-    )
+    ])
 
     return (
         <div className='the-signup-form'>
