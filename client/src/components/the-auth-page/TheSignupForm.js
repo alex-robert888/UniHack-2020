@@ -4,6 +4,7 @@ import BaseInputText from '../base/BaseInputText';
 import BaseInputTelephone from '../base/BaseInputTelephone';
 import BaseInputRadioButtons from '../base/BaseInputRadioButtons';
 import { Fragment, useState } from 'react';
+import { BrowserRouter as Redirect, useHistory } from 'react-router-dom';
 import '../../style/classes.scss'
 import axios from 'axios';
 
@@ -20,6 +21,7 @@ const TheSignupForm = () => {
         confirmedPassword: ''
     });
 
+    // Sign up fields
     let [type, setType] = useState('');
     let [fullName, setFullName] = useState('');
     let [email, setEmail] = useState('');
@@ -31,11 +33,13 @@ const TheSignupForm = () => {
     let [country, setCountry] = useState('');
     let [city, setCity] = useState('');
 
-    function printState(e) {
-        e.preventDefault();
-        setUserSignUpData({
+    // Redirect
+    let [urlToRedirectTo, setUrlToRedirectTo] = useState(null);
+    let [history, setHistory] = useState(useHistory());
 
-        })
+    function printState(e) {
+        setUrlToRedirectTo('/auth/login')
+        e.preventDefault();
     }
 
     async function loadDataToContextAndDB() {
@@ -58,6 +62,9 @@ const TheSignupForm = () => {
         catch(exception) {
             alert(exception);
         } 
+
+        // After successful sign up, redirect me to login
+        setUrlToRedirectTo('/auth/login')
     }
 
     let [listForms, setListForms] = useState([
@@ -85,11 +92,15 @@ const TheSignupForm = () => {
         </Fragment>
     ])
 
+    if (urlToRedirectTo) {
+        history.push(urlToRedirectTo);
+    }
+
     return (
         <div className='the-signup-form'>
             <h2 className='glb-h2'>Create a new account!</h2>
             <BaseMultipageCard numberOfPages={3} listPages={listForms} buttonFinishPressed={() => loadDataToContextAndDB()} />
-            {/* <button onClick={printState}>Show state</button> */}
+            <button onClick={printState}>Show state</button>
         </div>
     );
 }
