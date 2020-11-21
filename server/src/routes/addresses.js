@@ -46,7 +46,7 @@ Add a new address to the database
             "building_number": Number
             "unit": String
             "apartment": Number
-            "landlord_id": String (must be existing)
+            "landlord_pid": String (must be existing)
         In parameters:
             -
 */

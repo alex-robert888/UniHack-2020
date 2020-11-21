@@ -118,12 +118,12 @@ router.put('/change_address/:pid', function (req, res, next) {
         }
         else{
             console.log("Finding address");
-            Address.findOne({public_id: req.body.address_id})
+            Address.findOne({public_id: req.body.address_pid})
             .then(address =>
                 {
                     if(address){
                         console.log("Address: " + address);
-                        tenant.address_id = req.body.address_id;
+                        tenant.address_pid = req.body.address_pid;
                         tenant.save()
                     .then(() => res.json('Tenant address updated'))
                     .catch(err => next(err));

@@ -16,7 +16,7 @@ const TheHeaderSectionLogged = (props) => { // props.type: tenant,landlord or co
                 )}
                 {props.type === "landlord" && (
                     <div className="the-header-options">
-                        <a href="#new_address" className="anchor" onClick={() => {}}>New address</a>
+                        <a href="/landlord/address" className="anchor" onClick={() => {}}>New address</a>
                         <TheHeaderProfileSection />
                         <LogOut />
                     </div>
