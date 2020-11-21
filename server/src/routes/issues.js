@@ -42,6 +42,14 @@ router.get('/byaddress/:address_pid',
     }
 );
 
+router.get('/bypid/:pid',
+    (req, res, next) => {
+        Issue.findOne( {"address_pid": req.params.address_pid} )
+            .then(issue => res.json(issue))
+            .catch(err => next(err));
+    }
+);
+
 router.get('/bycontractor/:contractor_pid',
     async function (req, res, next) {
         try{
