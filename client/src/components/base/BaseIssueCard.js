@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './BaseIssueCard.scss';
 import '../../style/classes.scss';
+import BaseTagStatus from './BaseTagStatus';
 
 const MAX_COUNT = 150; // take caution: issue-cards are going to be small
 
@@ -44,7 +45,7 @@ class BaseIssueCard extends Component{ // postedDate, title, description, tag, b
                     <span className="issue-expand" onClick={this.state.isExpanded ? this.hide_issue : this.expand_issue}>{this.state.isExpanded ? "Hide" : "Expand.."}</span>}
                 </article>
                 <article className="issue-card-right">
-                        <span className="issue-tag">{this.props.tag}</span> 
+                        <BaseTagStatus className="issue-tag" status={this.props.tag}/>
                         <button className="issue-button glb-base-outlined-button">{this.props.button}</button>
                     </article>
             </article>

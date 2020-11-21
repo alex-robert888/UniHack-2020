@@ -23,7 +23,7 @@ const TheHomePage = () => {
                 button="Mark as done"
             />
             <BaseTagStatus 
-                status="Pending"
+                status="Open"
             />
         </div>
     );

@@ -1,19 +1,39 @@
 @import '../../style/variables/colours';
 
 .tag-box {
-    text-align: center;
-    width: 8.5vw;
-    height: 5.5vh;
+    width: 8vw;
+    height: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tag-text {
     font-weight: 600;
     letter-spacing: 0.12rem;
     font-size: 1.1rem;
 }
 
-.tag-pending{
-    color: $base-white;
+.tag-box-pending{
     background-color: $base-orange;
 }
 
+.tag-pending{
+    color: $base-white;
+}
+
+.tag-box-solved{
+    background-color: $base-green;
+}
+
 .tag-solved{
-    $base-green: #40FFB3;
+    color: $base-white;
+}
+
+.tag-box-open{
+    background-color: $base-contractor-tag-color;
+}
+
+.tag-open{
+    color: $base-white;
 }

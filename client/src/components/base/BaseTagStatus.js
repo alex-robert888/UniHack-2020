@@ -1,10 +1,10 @@
 import './BaseTagStatus.scss';
 
-const BaseTagStatus = (props) => { // ### WORK IN PROGRESS ###
+const BaseTagStatus = (props) => { // "Open Pending Solved"
+    const status_name = props.status.toLowerCase();
     return (
-        <article className={"tag-box"}>
-            <span className={"tag-" + props.status.toLowerCase()}></span>
-            {props.status}
+        <article className={"tag-box tag-box-" + status_name}>
+            <span className={"tag-text tag-" + status_name}>{props.status}</span>
         </article>
     );
 }
