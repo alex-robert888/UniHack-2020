@@ -6,7 +6,8 @@ const tenantSchema = new Schema(
     {
         public_id: {
             type: String,
-            required: true
+            required: true,
+            unique: true
         },
         email: {
             type: String,
@@ -37,7 +38,7 @@ const tenantSchema = new Schema(
         gender:{
             type: String
         },
-        address_id: {
+        address_pid: {
             type: String,
             default: null
         }

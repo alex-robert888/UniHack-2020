@@ -3,6 +3,13 @@ const Contractor = require('../models/contractor_model');
 
 const router = express.Router();
 
+/*Return all contractors in the database
+    Requires:
+        In body:
+            -
+        In parameters:
+            -
+*/
 router.get('/',
     (req, res, next) => {
         Contractor.find()
@@ -11,6 +18,13 @@ router.get('/',
     }
 );
 
+/*Return the contractor with the matching pid
+    Requires:
+        In body:
+            -
+        In parameters:
+            pid: String
+*/
 router.get('/getbypid/:pid',
     (req, res, next) => {
         Contractor.find({ "public_id": req.params.pid})

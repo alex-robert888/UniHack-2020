@@ -6,7 +6,8 @@ const addressSchema = new Schema(
     {
         public_id: {
             type: String,
-            required: true
+            required: true,
+            unique: true
         },
         country: {
             type: String,

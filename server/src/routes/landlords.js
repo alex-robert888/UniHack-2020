@@ -3,6 +3,13 @@ const  Landlord = require('../models/landlord_model');
 
 const router = express.Router();
 
+/*Return all landlords in the database
+    Requires:
+        In body:
+            -
+        In parameters:
+            -
+*/
 router.get('/',
     (req, res, next) => {
         Landlord.find()
@@ -11,6 +18,13 @@ router.get('/',
     }
 );
 
+/*Return the landlord with the matching pid
+    Requires:
+        In body:
+            -
+        In parameters:
+            pid: String
+*/
 router.get('/getbypid/:pid',
     (req, res, next) => {
         Landlord.find({ "public_id": req.params.pid})

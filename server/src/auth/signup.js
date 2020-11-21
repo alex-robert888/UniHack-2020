@@ -8,6 +8,23 @@ const router = express.Router();
 
 const generate_pid = require('../utility/generate_pId');
 
+/*Adds a new tenant to the database
+    Requires:
+        In body:
+            "email": String (unique)
+            "password": String
+            "fullname": String
+            "phone": Number
+            "country": String
+            "city": String
+            "date_of_birth": String
+            "gender": String
+        In parameters:
+            -
+    Returns:
+        "Tenant signup ✅" if signup successful
+        Error message otherwise
+*/
 router.post('/tenant', (req, res, next) => {
     var exists = true;
     var new_pid;
@@ -46,6 +63,7 @@ router.post('/tenant', (req, res, next) => {
         .catch(err => next(err));
 });
 
+//Same as tenant
 router.post('/landlord', (req, res, next) => {
     var exists = true;
     var new_pid;
@@ -82,6 +100,7 @@ router.post('/landlord', (req, res, next) => {
         .catch(err => next(err));
  });
 
+ //Same as tenant
  router.post('/contractor', (req, res, next) => {
     var exists = true;
     var new_pid;
