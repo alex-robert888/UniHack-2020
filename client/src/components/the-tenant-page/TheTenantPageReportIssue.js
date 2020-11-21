@@ -21,7 +21,11 @@ const TheTenantPageReportIssue = () => { // props.addressPid buttonFinishedPress
                 address_pid: tenantByID.data.address_pid,
                 description: description,
                 title: title,
+<<<<<<< HEAD
                 tenant_pid: localStorage.getItem('public_id')
+=======
+                tenant_pid: sessionStorage.getItem('public_id')
+>>>>>>> d290f0de4ba091415290f4f8db4a24d4cf226a4d
             })
         }
         catch(exception) {

@@ -15,6 +15,7 @@ class BaseIssueCard extends Component{ // issue_pid, postedDate, title, descript
             price: -1,
             applicantsComponent: ""
         }
+        this.setState({price: this.props.price})
         this.description_length = this.props.description.length;
     }
 
@@ -40,6 +41,7 @@ class BaseIssueCard extends Component{ // issue_pid, postedDate, title, descript
             })
         }catch(exception){
             alert(exception);
+            return;
         }
     }
 
@@ -48,20 +50,28 @@ class BaseIssueCard extends Component{ // issue_pid, postedDate, title, descript
         try{
             let issue = await axios.get(`http://localhost:5000/routes/issues/bypid/${this.props.issue_pid}`)
             let applicants = issue.data.applicants_list;
+            console.log("----- APPLICANTS", applicants);
             let applicants_res = [];
             for(let idx=0;idx<applicants.length;idx++){
                 let applicant = await axios.get(`http://localhost:5000/routes/contractors/getbypid/${applicants[idx].contractor_pid}`);
-                applicants_res.push(applicant);
+                applicants_res.push({contractor: applicant, price: applicants[idx].price});
+                console.log("AAAAAAAAAAAAAAAAA: ", applicant)
             }
             return applicants_res;
             
         }catch(exception){
             alert(exception);
+            return;
         }
     }
 
     async componentDidMount(){
         this.setState({applicantsComponent: await this.getApplicantsComponents()});
+<<<<<<< HEAD
+=======
+        
+        // this.forceUpdate();
+>>>>>>> d290f0de4ba091415290f4f8db4a24d4cf226a4d
     }
 
     acceptApplicant = async (public_id) => {
@@ -73,7 +83,12 @@ class BaseIssueCard extends Component{ // issue_pid, postedDate, title, descript
             
         }catch(exception){
             alert(exception);
+            return;
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> d290f0de4ba091415290f4f8db4a24d4cf226a4d
         window.location.reload(false);
     }
 
@@ -83,12 +98,12 @@ class BaseIssueCard extends Component{ // issue_pid, postedDate, title, descript
         if(applicants == null){
             return "";
         }
-        console.log(applicants);
+        console.log("APLICATNTS: ", applicants);
         const applicantsToShow = applicants.map(applicant => 
                 (
-                <article className="issue-card-offers glb-base-container" key={applicant.data[0].public_id}>
-                    <h3>{applicant.data[0].fullname} offered to help</h3>
-                    <button className="glb-base-filled-button" onClick={() => this.acceptApplicant(applicant.data[0].public_id)}>Accept</button>
+                <article className="issue-card-offers glb-base-container" key={applicant.contractor.data[0].public_id}>
+                    <h3>{applicant.contractor.data[0].fullname} offered to help for {applicant.price}</h3>
+                    <button className="glb-base-filled-button" onClick={() => this.acceptApplicant(applicant.contractor.data[0].public_id)}>Accept</button>
                 </article>
                 )
             );
@@ -96,9 +111,34 @@ class BaseIssueCard extends Component{ // issue_pid, postedDate, title, descript
         return applicantsToShow;
     }
     
+    acceptContractorForIssue = async () => {
+        try {
+            await axios.put(`http://localhost:5000/routes/issues/accept/${this.props.issue_pid}`);
+        }
+        catch(exc) {
+            alert(exc);
+            return;
+        }
+
+        window.location.reload(false);
+    }
+
+    markAsDone = async () => {
+        try {
+            await axios.put(`http://localhost:5000/routes/issues/solve/${this.props.issue_pid}`);
+        }
+        catch(exc) {
+            alert(exc);
+            return;
+        }
+
+        window.location.reload(false);
+    }
 
     buttonClickHandler = () => {
-        if(this.state.price === -1 || isNaN(this.state.price)){
+
+
+        if(this.props.status == 'open' && (this.state.price === -1 || isNaN(this.state.price))){
             alert('Invalid price');
         }
         if(this.props.tag === "open"){       
@@ -107,19 +147,35 @@ class BaseIssueCard extends Component{ // issue_pid, postedDate, title, descript
             // change the 
             // notify tenant
             // 
-        }else if(this.props.tag === "pending"){
-            // accept something
+        }
+        else if(this.props.tag === "pending"){
+            this.acceptContractorForIssue();
+            
+        }
+        else if (this.props.tag === 'accepted') {
+            this.markAsDone();
         }
 
         window.location.reload(false);
     }
 
-    
+    buttonRejectClickHandler = async () => {
+        try {
+            await axios.put(`http://localhost:5000/routes/issues/reject/${this.props.issue_pid}`);
+        }
+        catch(exc) {
+            alert(exc);
+        }
+
+        window.location.reload(false);
+    }
 
     render(){
         let description = this.state.isExpanded ? this.props.description : this.trimDescription(this.props.description);
         let public_id = sessionStorage.getItem('public_id');
         let whatToShow = (<BaseTagStatus className="issue-tag" status={this.props.tag}/>);
+        let rejectButton = '';
+
         if(this.props.tag === 'open' && public_id[0] === 'c'){
             // input field
             whatToShow = (
@@ -128,7 +184,23 @@ class BaseIssueCard extends Component{ // issue_pid, postedDate, title, descript
                 <BaseInputText type="text" valueUpdated={price => this.setState({price: parseInt(price)})} />
             </div>)
         }
+        else if(this.props.tag === 'closed' && public_id[0] === 'c'){
+            // input field
+            whatToShow = (<BaseTagStatus className="issue-tag" status={this.props.tag}/>);
+        }
+        else if (this.props.tag == 'pending' && public_id[0] == 'l') {
+            whatToShow = (
+                <div className="glb-base-input-component glb-flex-center">
+                    <p>Price proposed: {this.props.price}$</p>
+                </div>)
 
+            if (this.props.button) {
+                rejectButton = (<button className="issue-button glb-base-outlined-button-red" onClick={this.buttonRejectClickHandler}>Reject</button>)
+            }
+        }
+
+
+        
         return (
             <article>
                 <article className="issue-card glb-base-container">
@@ -145,10 +217,11 @@ class BaseIssueCard extends Component{ // issue_pid, postedDate, title, descript
                     
                     <article className="issue-card-right">
                         {whatToShow}
-                        <button className="issue-button glb-base-outlined-button" onClick={this.buttonClickHandler}>{this.props.button}</button>
+                        {this.props.button && this.props.button != '' && <button className="issue-button glb-base-outlined-button" onClick={this.buttonClickHandler}>{this.props.button}</button>}
+                        {rejectButton}
                     </article>
                 </article>
-                {this.state.applicantsComponent}
+                {sessionStorage.getItem('public_id')[0] === 't' && this.state.applicantsComponent}
             </article>
         );
     }

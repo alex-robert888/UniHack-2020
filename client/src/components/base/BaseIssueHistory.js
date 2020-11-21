@@ -24,8 +24,47 @@ const BaseIssueHistory = () => { // props.listIssues - list of BaseIssueCard
             if(types === "tenants"){
                 issuesList = await axios.get(`http://localhost:5000/routes/issues/byaddress/${userByID.data.address_pid}`);
             }else if(types === "contractors"){
-                // waiting
-            }           
+                try {
+                    const issuesList = await axios.get(`http://localhost:5000/routes/issues/bycontractor/${public_id}`);
+
+                    setHtmlIssuesList(issuesList.data.map(issue => {
+                        let buttonMessage = 'yad yad';
+                        console.log(issue.status);
+                        if (issue.status === 'closed' && public_id[0] === 'c')
+                         {
+                             buttonMessage = '';
+                         }     
+                        else if (issue.status === 'open' && public_id[0] === 'c') {
+                            return '';
+                        }
+                        else if (issue.status === 'pending' && public_id[0] === 'c') {
+                            return '';
+                        }
+                       // console.log(buttonMessage);
+                        return (
+                        <BaseIssueCard 
+                            key={issue._id} 
+                            issue_pid={issue.public_id}
+                            title={issue.title} 
+                            description={issue.description} 
+                            postedDate={issue.createdAt} 
+                            tag={issue.status}  
+                            button={buttonMessage}
+                        />
+                    )}
+                    ));
+
+                }
+                catch (exception) {
+                    alert(exception);
+                    return;
+                }
+            }
+            // alert(tenantByID.data.address_pid); CORECT
+            // toate adresele pt un landlord
+            // pentru fiecare adresa luata trebuie sa iau issuirile corespunzatoare
+            // 
+            
             //console.log(tenanantIssuesList);
             //setIssuesList(tenanantIssuesList);
             console.log(issuesList);
@@ -37,8 +76,21 @@ const BaseIssueHistory = () => { // props.listIssues - list of BaseIssueCard
         if(!issuesList.data){
             return;
         }
+
+        const sessionPublicId = sessionStorage.getItem('public_id');
+
         console.log("issuesList: ", issuesList.data);
-        setHtmlIssuesList(issuesList.data.map(issue => (
+        setHtmlIssuesList(issuesList.data.map(issue => {
+            let buttonMessage = '';
+            if (issue.status === 'accepted' && sessionPublicId[0] === 't')
+            {
+                buttonMessage = 'mark solved';
+            }     
+            else if (issue.status === 'solved' && sessionPublicId[0] === 't') {
+                buttonMessage = '';
+            }
+            console.log(buttonMessage);
+            return (
             <BaseIssueCard 
                 key={issue._id} 
                 issue_pid={issue.public_id}
@@ -46,9 +98,10 @@ const BaseIssueHistory = () => { // props.listIssues - list of BaseIssueCard
                 description={issue.description} 
                 postedDate={issue.createdAt} 
                 tag={issue.status}  
-                button='yada yada'
+                button={buttonMessage}
             />
-        )));
+        )}
+        ));
 
         console.log(htmlIssuesList);
     }, [])

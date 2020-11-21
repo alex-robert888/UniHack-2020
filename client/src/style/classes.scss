@@ -69,6 +69,22 @@
     font-size: 1.1rem;
 }
 
+.glb-base-outlined-button-red {
+    width: 8.5vw;
+    height: 5.5vh;
+    //border: 1px solid $base-green;
+    border: 2px solid #e01212;;
+    outline: none;
+    background-color: $base-white;
+    color: #e01212;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+    letter-spacing: 0.12rem;
+    font-size: 1.1rem;
+}
+
+
 .glb-base-filled-button {
     width: 8.5vw;
     height: 5.5vh;
