@@ -424,6 +424,7 @@ router.get('/getbill/:pid', function(req, res, next){
             if (issue.bill_image == null) res.send("No bill uploaded")
             else{
                 console.log(path.resolve("uploads/" + issue.bill_image));
+                res.contentType('image/png');
                 res.sendFile(path.resolve("uploads/" + issue.bill_image));
             }
         }
