@@ -44,7 +44,7 @@ router.get('/byaddress/:address_pid',
 
 router.get('/bypid/:pid',
     (req, res, next) => {
-        Issue.findOne( {"address_pid": req.params.address_pid} )
+        Issue.findOne( {"public_id": req.params.pid} )
             .then(issue => res.json(issue))
             .catch(err => next(err));
     }
