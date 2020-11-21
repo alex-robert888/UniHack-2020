@@ -46,6 +46,7 @@ const BaseIssueHistory = () => { // props.listIssues - list of BaseIssueCard
         setHtmlIssuesList(issuesList.data.map(issue => (
             <BaseIssueCard 
                 key={issue._id} 
+                issue_pid={issue.public_id}
                 title={issue.title} 
                 description={issue.description} 
                 postedDate={issue.createdAt} 

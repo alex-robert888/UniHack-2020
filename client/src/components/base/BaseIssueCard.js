@@ -12,19 +12,18 @@ class BaseIssueCard extends Component{ // issue_pid, postedDate, title, descript
         super(props);
         this.state = {
             isExpanded: false,
-            price: -1
+            price: -1,
+            applicantsComponent: ""
         }
         this.description_length = this.props.description.length;
     }
 
     expand_issue = () => {
         this.setState({isExpanded: true});
-        console.log('expand');
     }
     
     hide_issue = () => {
         this.setState({isExpanded: false});
-        console.log('hide');
     }
 
     trimDescription = (description) => {
@@ -47,12 +46,40 @@ class BaseIssueCard extends Component{ // issue_pid, postedDate, title, descript
     getAllApplicantsForTenant = async () => {
         //byaddress/:address_pid
         try{
-            return await axios.get(`http://localhost:5000/routes/issues/bypid/`, {
-
-            }) 
+            alert(this.props.issue_pid);
+            let applicant_pids = await axios.get(`http://localhost:5000/routes/issues/bypid/${this.props.issue_pid}`)
+            console.log(applicant_pids);
+            /*
+            let applicants = [];
+            for(let idx in applicant_pids){
+                let applicant = await axios.get(`http://localhost:5000/routes/contractors/getbypid/${applicant_pids[idx]}`);
+                applicants.push(applicant);
+            }
+            */
+            return []; // applicants
+            
         }catch(exception){
             alert(exception);
         }
+    }
+
+    componentDidMount(){
+        this.setState({applicantsComponent: this.getApplicantsComponents()});
+    }
+
+    getApplicantsComponents = async () => {
+        const applicants = await this.getAllApplicantsForTenant();
+
+        if(applicants === null){
+            return "";
+        }
+        const applicantsToShow = applicants.map(applicant => 
+                (
+                <article className="issue-card-offers glb-base-container">
+                    <span>{applicant.fullname}</span>
+                </article>
+                )
+            );
     }
     
 
@@ -73,6 +100,8 @@ class BaseIssueCard extends Component{ // issue_pid, postedDate, title, descript
         window.location.reload(false);
     }
 
+    
+
     render(){
         let description = this.state.isExpanded ? this.props.description : this.trimDescription(this.props.description);
         let public_id = sessionStorage.getItem('public_id');
@@ -85,13 +114,6 @@ class BaseIssueCard extends Component{ // issue_pid, postedDate, title, descript
                 <BaseInputText type="text" valueUpdated={price => this.setState({price: parseInt(price)})} />
             </div>)
         }
-
-        const applicants =
-            (
-            <article className="issue-card-offers glb-base-container">
-                New applicant
-            </article>
-            );
 
         return (
             <article>
@@ -112,7 +134,7 @@ class BaseIssueCard extends Component{ // issue_pid, postedDate, title, descript
                         <button className="issue-button glb-base-outlined-button" onClick={this.buttonClickHandler}>{this.props.button}</button>
                     </article>
                 </article>
-                {applicants}
+                {""}
             </article>
         );
     }
