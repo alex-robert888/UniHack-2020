@@ -1,8 +1,16 @@
 .address-section{
-    
+    width: 50vw;
+    margin: 3vh auto;
+    padding: 3vh 3vw;
 }
 
 .address-form{
     display: flex;
     flex-direction: column;
+}
+
+.address-form-footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between
 }
