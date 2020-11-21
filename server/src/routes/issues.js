@@ -42,6 +42,13 @@ router.get('/byaddress/:address_pid',
     }
 );
 
+/*Return the issues with the given pid
+    Requires:
+        In body:
+            -
+        In parameters:
+            pid: String
+*/
 router.get('/bypid/:pid',
     (req, res, next) => {
         Issue.findOne( {"public_id": req.params.pid} )
@@ -50,7 +57,14 @@ router.get('/bypid/:pid',
     }
 );
 
-router.get('/bycontractor/:contractor_pid', 
+/*Return all issues that the contractor is involved in
+    Requires:
+        In body:
+            -
+        In parameters:
+            contractor_pid: String
+*/
+router.get('/bycontractor/:contractor_pid',
     async function (req, res, next) {
         try{
             issues = await Issue.find();
@@ -198,7 +212,6 @@ router.put('/apply/:pid', function(req, res, next){
     Requires:
         In body:
             "contractor_pid": String (must be existing)
-            "price": Number
         In parameters:
             pid: String
 */
@@ -399,6 +412,13 @@ router.put('/close/:pid', function(req, res, next){
     .catch(err => next(err));
 })
 
+/*Upload the bill for a solved issue
+    Requires:
+        In body:
+            file: File (image file, preferably png)
+        In parameters:
+            pid: String
+*/
 router.put('/sendbill/:pid', upload.single('file'), function(req, res, next){
     Issue.findOne({ "public_id": req.params.pid })
     .then(issue => {
@@ -426,6 +446,13 @@ router.put('/sendbill/:pid', upload.single('file'), function(req, res, next){
     .catch(err => next(err));
 })
 
+/*Upload the bill for a solved issue
+    Requires:
+        In body:
+            file: File (image file, preferably png)
+        In parameters:
+            pid: String
+*/
 router.get('/getbill/:pid', function(req, res, next){
     Issue.findOne({ "public_id": req.params.pid })
     .then(issue => {

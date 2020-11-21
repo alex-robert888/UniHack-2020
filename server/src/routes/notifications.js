@@ -9,6 +9,13 @@ const personInDatabase = require('../utility/personInDatabase');
 
 const router = express.Router();
 
+/*Return all notifications in the database
+    Requires:
+        In body:
+            -
+        In parameters:
+            -
+*/
 router.get('/',
     (req, res, next) => {
         Notification.find()
@@ -17,6 +24,15 @@ router.get('/',
     }
 );
 
+/*Return notifications with the given receiver pid. Will return notifications in descending order based on date,
+(newer first). The nr indicates how many entries should be returned (0 for all of them)
+    Requires:
+        In body:
+            -
+        In parameters:
+            receiver_pid: String
+            nr: Number
+*/
 router.get('/byreceiver/:receiver_pid/:nr',
     (req, res, next) => {
         Notification.find( {"receiver_pid": req.params.receiver_pid} ).sort( 'field -date_posted' )
@@ -34,6 +50,16 @@ router.get('/byreceiver/:receiver_pid/:nr',
     }
 );
 
+/*Add a new notifications to the database
+    Requires:
+        In body:
+            "type": String (can be "client_accepted", "landlord_accepted" or "invitation")
+            "sender_pid": String (must be existing or null)
+            "receiver_pid": String (must be existing)
+            "description": String
+        In parameters:
+            -
+*/
 router.post('/add', async function(req, res, next){
     try{
         if(await personInDatabase(req.body.receiver_pid)){
@@ -79,6 +105,13 @@ router.post('/add', async function(req, res, next){
     catch(error) { next(error); }
 });
 
+/*Mark the notification as seen
+    Requires:
+        In body:
+            -
+        In parameters:
+            pid: String
+*/
 router.put('/mark/:pid', function (req, res, next) {
     var msg = "";
     Notification.findOne({ public_id: req.params.pid })

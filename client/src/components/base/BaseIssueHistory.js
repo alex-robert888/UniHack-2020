@@ -29,13 +29,17 @@ const BaseIssueHistory = () => { // props.listIssues - list of BaseIssueCard
 
                     setHtmlIssuesList(issuesList.data.map(issue => {
                         let buttonMessage = 'yad yad';
+                        console.log(issue.status);
                         if (issue.status === 'closed' && public_id[0] === 'c')
                          {
                              buttonMessage = '';
                          }     
-                        // else if (issue.status === 'solved' && sessionPublicId[0] === 't') {
-                        //     buttonMessage = '';
-                        // }
+                        else if (issue.status === 'open' && public_id[0] === 'c') {
+                            return '';
+                        }
+                        else if (issue.status === 'pending' && public_id[0] === 'c') {
+                            return '';
+                        }
                        // console.log(buttonMessage);
                         return (
                         <BaseIssueCard 

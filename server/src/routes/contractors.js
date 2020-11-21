@@ -34,6 +34,20 @@ router.get('/getbypid/:pid',
     }
 );
 
+/*Update the contractor with the given pid
+    Requires:
+        In body:
+            "email": String
+            "password": String
+            "fullname": String
+            "phone": Number
+            "country": String
+            "city": String
+            "date_of_birth": String
+            "gender": String
+        In parameters:
+            pid: String
+*/
 router.put('/update/:pid', function (req, res, next) {
     var msg = "";
     Contractor.findOne({ public_id: req.params.pid })
@@ -57,6 +71,13 @@ router.put('/update/:pid', function (req, res, next) {
     .catch(err => next(err));
 })
 
+/*Update the specializations of the contractor with the given pid
+    Requires:
+        In body:
+            "specializations": [String]
+        In parameters:
+            pid: String
+*/
 router.put('/specializations/:pid', function (req, res, next) {
     var msg = "";
     Contractor.findOne({ public_id: req.params.pid })
@@ -77,6 +98,15 @@ router.put('/specializations/:pid', function (req, res, next) {
     .catch(err => next(err));
 })
 
+/*Post a review for the contractor with the given pid
+    Requires:
+        In body:
+            "stars": Number (1-5)
+            "description": String
+            "sender_tenant_pid": String (must be existing or null)
+        In parameters:
+            pid: String
+*/
 router.put('/review/:pid', function (req, res, next) {
     var msg = "";
     Contractor.findOne({ public_id: req.params.pid })
