@@ -28,128 +28,49 @@ router.get('/byreceiver/:receiver_pid',
 
 
 router.post('/add', function(req, res, next){
-    if(req.body.receiver_pid.match("^t.*")){
-        Tenant.findOne({public_id: req.body.receiver_pid})
-        .then(tenant => {
-            if(tenant){
-                var exists = true;
-                var new_pid;
-                while(exists){
-                    new_pid = generate_pid("n");
-                    exists = (Notification.count( {"public_id" : new_pid} ) > 0);
-                }
-
-                const public_id = new_pid;
-                const type = req.body.type;
-                const sender_pid = req.body.sender_pid;
-                const receiver_pid = req.body.receiver_pid;
-                const description = req.body.description;
-                const date_posted = Date.now();
-                
-                const newIssue = new Issue({
-                    "public_id": public_id,
-                    "type": type,
-                    "sender_pid": sender_pid,
-                    "receiver_pid": receiver_pid,
-                    "description": description,
-                    "date_posted": date_posted
-                });
-
-                newIssue.save()
-                    .then(() => res.json({
-                        status: 'Issue added'
-                        })  
-                    )
-                    .catch(err => next(err));
+    personInDatabase(req.body.receiver_pid)
+    .then(result => {
+        if(result) console.log("In database");
+        else console.log("Not in database");
+    })
+    .catch(err => next(err));
+    /*{
+        if(sender_pid == null || await personInDatabase(req.body.sender_pid)){
+            var exists = true;
+            var new_pid;
+            while(exists){
+                new_pid = generate_pid("n");
+                exists = (await Notification.count( {"public_id" : new_pid} ) > 0);
             }
-            else{
-                res.json("Receiver does not exist");
-            }
-        })
-        .catch(err => next(err));
 
+            const public_id = new_pid;
+            const type = req.body.type;
+            const sender_pid = req.body.sender_pid;
+            const receiver_pid = req.body.receiver_pid;
+            const description = req.body.description;
+            const date_posted = Date.now();
+            
+            const newIssue = new Issue({
+                "public_id": public_id,
+                "type": type,
+                "sender_pid": sender_pid,
+                "receiver_pid": receiver_pid,
+                "description": description,
+                "date_posted": date_posted
+            });
+
+            await newIssue.save()
+                .then(() => res.json({
+                    status: 'Issue added'
+                    })  
+                )
+                .catch(err => next(err));
+        }
+        else{
+            res.json("Sender pid not in database");
+        }
     }
-    else if(req.body.receiver_pid.match("^c.*")){
-        Contractor.findOne({public_id: req.body.receiver_pid})
-        .then(contractor => {
-            if(contractor){
-                var exists = true;
-                var new_pid;
-                while(exists){
-                    new_pid = generate_pid("n");
-                    exists = (Notification.count( {"public_id" : new_pid} ) > 0);
-                }
-
-                const public_id = new_pid;
-                const type = req.body.type;
-                const sender_pid = req.body.sender_pid;
-                const receiver_pid = req.body.receiver_pid;
-                const description = req.body.description;
-                const date_posted = Date.now();
-                
-                const newIssue = new Issue({
-                    "public_id": public_id,
-                    "type": type,
-                    "sender_pid": sender_pid,
-                    "receiver_pid": receiver_pid,
-                    "description": description,
-                    "date_posted": date_posted
-                });
-
-                newIssue.save()
-                    .then(() => res.json({
-                        status: 'Issue added'
-                        })  
-                    )
-                    .catch(err => next(err));
-            }
-            else{
-                res.json("Receiver does not exist");
-            }
-        })
-        .catch(err => next(err));
-    }
-    else if(req.body.receiver_pid.match("^l.*")){
-        Landlord.findOne({public_id: req.body.receiver_pid})
-        .then(landlord => {
-            if(landlord){
-                var exists = true;
-                var new_pid;
-                while(exists){
-                    new_pid = generate_pid("n");
-                    exists = (Notification.count( {"public_id" : new_pid} ) > 0);
-                }
-
-                const public_id = new_pid;
-                const type = req.body.type;
-                const sender_pid = req.body.sender_pid;
-                const receiver_pid = req.body.receiver_pid;
-                const description = req.body.description;
-                const date_posted = Date.now();
-                
-                const newIssue = new Issue({
-                    "public_id": public_id,
-                    "type": type,
-                    "sender_pid": sender_pid,
-                    "receiver_pid": receiver_pid,
-                    "description": description,
-                    "date_posted": date_posted
-                });
-
-                newIssue.save()
-                    .then(() => res.json({
-                        status: 'Issue added'
-                        })  
-                    )
-                    .catch(err => next(err));
-            }
-            else{
-                res.json("Receiver does not exist");
-            }
-        })
-        .catch(err => next(err));
-    }
-    else res.json("Invalid receiver pid"); 
+    else res.json("Invalid receiver pid"); */
 });
 
 module.exports = router;
