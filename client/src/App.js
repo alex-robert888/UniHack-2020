@@ -14,7 +14,7 @@ const App = () => {
     <UserState>
       <Router>
         <div className='App'>
-          <TheHeader />
+          <TheHeader/>
           <Switch>
             <Route path='/' exact component={TheHomePage} />
             <Route path='/auth' component={TheAuthPage} />
