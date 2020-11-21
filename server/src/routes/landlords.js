@@ -33,6 +33,20 @@ router.get('/getbypid/:pid',
     }
 );
 
+/*Update the landlord with the given pid
+    Requires:
+        In body:
+            "email": String
+            "password": String
+            "fullname": String
+            "phone": Number
+            "country": String
+            "city": String
+            "date_of_birth": String
+            "gender": String
+        In parameters:
+            pid: String
+*/
 router.put('/update/:pid', function (req, res, next) {
     var msg = "";
     Landlord.findOne({ public_id: req.params.pid })

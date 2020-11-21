@@ -4,6 +4,7 @@ const Contractor = require('../models/contractor_model');
 const Landlord = require('../models/landlord_model');
 const Notification = require('../models/notification_model');
 
+//Check if the given pid of a tenant, contractor or landlord appears in the database
 async function personInDatabase(pid){
     console.log(pid);
     try{
