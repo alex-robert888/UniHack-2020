@@ -46,25 +46,35 @@ class BaseIssueCard extends Component{ // issue_pid, postedDate, title, descript
     getAllApplicantsForTenant = async () => {
         //byaddress/:address_pid
         try{
-            alert(this.props.issue_pid);
-            let applicant_pids = await axios.get(`http://localhost:5000/routes/issues/bypid/${this.props.issue_pid}`)
-            console.log(applicant_pids);
-            /*
-            let applicants = [];
-            for(let idx in applicant_pids){
-                let applicant = await axios.get(`http://localhost:5000/routes/contractors/getbypid/${applicant_pids[idx]}`);
-                applicants.push(applicant);
+            let issue = await axios.get(`http://localhost:5000/routes/issues/bypid/${this.props.issue_pid}`)
+            let applicants = issue.data.applicants_list;
+            let applicants_res = [];
+            for(let idx=0;idx<applicants.length;idx++){
+                let applicant = await axios.get(`http://localhost:5000/routes/contractors/getbypid/${applicants[idx].contractor_pid}`);
+                applicants_res.push(applicant);
             }
-            */
-            return []; // applicants
+            return applicants_res;
             
         }catch(exception){
             alert(exception);
         }
     }
 
-    componentDidMount(){
-        this.setState({applicantsComponent: this.getApplicantsComponents()});
+    async componentDidMount(){
+        this.setState({applicantsComponent: await this.getApplicantsComponents()});
+        this.forceUpdate();
+    }
+
+    acceptApplicant = async (public_id) => {
+        try{
+            let issue = await axios.put(`http://localhost:5000/routes/issues/propose/${this.props.issue_pid}`, {
+                contractor_pid: public_id,
+                price: 0
+            })
+            
+        }catch(exception){
+            alert(exception);
+        }
     }
 
     getApplicantsComponents = async () => {
@@ -73,13 +83,17 @@ class BaseIssueCard extends Component{ // issue_pid, postedDate, title, descript
         if(applicants === null){
             return "";
         }
+        console.log(applicants);
         const applicantsToShow = applicants.map(applicant => 
                 (
-                <article className="issue-card-offers glb-base-container">
-                    <span>{applicant.fullname}</span>
+                <article className="issue-card-offers glb-base-container" key={applicant.data[0].public_id}>
+                    <h3>{applicant.data[0].fullname} offered to help</h3>
+                    <button className="glb-base-filled-button" onClick={() => this.acceptApplicant(applicant.data[0].public_id)}>Accept</button>
                 </article>
                 )
             );
+        
+        return applicantsToShow;
     }
     
 
@@ -134,7 +148,7 @@ class BaseIssueCard extends Component{ // issue_pid, postedDate, title, descript
                         <button className="issue-button glb-base-outlined-button" onClick={this.buttonClickHandler}>{this.props.button}</button>
                     </article>
                 </article>
-                {""}
+                {this.state.applicantsComponent}
             </article>
         );
     }
