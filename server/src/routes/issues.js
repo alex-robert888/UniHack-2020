@@ -50,7 +50,7 @@ router.get('/bypid/:pid',
     }
 );
 
-router.get('/bycontractor/:contractor_pid',
+router.get('/bycontractor/:contractor_pid', 
     async function (req, res, next) {
         try{
             issues = await Issue.find();
