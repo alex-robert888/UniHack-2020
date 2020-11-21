@@ -92,13 +92,15 @@ router.post('/add', function(req, res, next){
             const title = req.body.title;
             const description = req.body.description;
             const date_opened = Date.now();
+            const tenant_pid = req.body.tenant_pid;
             
             const newIssue = new Issue({
                 "public_id": public_id,
                 "address_pid": address_pid,
                 "description": description,
                 "title": title,
-                "date_opened": date_opened
+                "date_opened": date_opened,
+                "tenant_pid": tenant_pid
             });
 
             newIssue.save()

@@ -65,6 +65,9 @@ const issueSchema = new Schema(
         applicants_list: {
             type: [applicantSchema]
         },
+        tenant_pid: {
+            type: String
+        },
         contractor_pid: {
             type: String,
             default: null
