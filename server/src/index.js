@@ -25,12 +25,14 @@ const tenantsModule = require('./routes/tenants');
 const landlordsModule = require('./routes/landlords');
 const contractorsModule = require('./routes/contractors');
 const addressesModule = require('./routes/addresses');
+const issuesModule = require('./routes/issues');
 app.use('/auth/login', loginModule);
 app.use('/auth/signup', signupModule);
 app.use('/routes/tenants', tenantsModule);
 app.use('/routes/landlords', landlordsModule);
 app.use('/routes/contractors', contractorsModule);
 app.use('/routes/addresses', addressesModule);
+app.use('/routes/issues', issuesModule);
 
 //Initialize mongoose
 const url = "mongodb+srv://Bizso:TriduckForce@cluster0.obexd.mongodb.net/<dbname>?retryWrites=true&w=majority";
