@@ -25,6 +25,7 @@ const TheLandlordTableCard = ({addressPid, addressDescription, listOfTenants}) =
                     <TheLandlordAddTenant addressPid={addressPid} />
                 </div>
             </div>
+            
         </div>
     );
 }

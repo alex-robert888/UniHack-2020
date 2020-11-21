@@ -1,4 +1,3 @@
-
 import './TheLandlordTableOfTenants.scss';
 
 import TheLandlordTableCard from './TheLandlordTableCard';
@@ -29,9 +28,7 @@ const TheLandlordTableOfTenants = () => {
     }
 
     useEffect(async () => {
-        console.log('entered use effect!!!!!!!!!!!!')
         await loadData()
-        console.log("ZZZZZZZZZZZ: ", addressesAndTenants);
         setHtmlAddresses(addressesAndTenants.map((address) => (
             <TheLandlordTableCard 
                 key={address.addressDescription}
