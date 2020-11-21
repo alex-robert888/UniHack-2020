@@ -44,7 +44,7 @@ const TheLoginForm = () => {
         window.location.reload(false);
     }
     catch(exception) {
-        alert("MESSAGE: ", exception);
+        alert("MESSAGE: ", exception.stack);
     } 
 
 
@@ -54,6 +54,7 @@ const TheLoginForm = () => {
         <section id='the-login-form'>
           <h2 className='glb-h2'>Welcome back!</h2>  
           <BaseMultipageCard numberOfPages={1} listPages={listForms} buttonFinishPressed={() => loadDataToContext()} />
+          <a href="/auth/signup">Create new account</a>
         </section>
     );
 }

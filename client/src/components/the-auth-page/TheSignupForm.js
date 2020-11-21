@@ -100,7 +100,8 @@ const TheSignupForm = () => {
         <div className='the-signup-form'>
             <h2 className='glb-h2'>Create a new account!</h2>
             <BaseMultipageCard numberOfPages={3} listPages={listForms} buttonFinishPressed={() => loadDataToContextAndDB()} />
-            <button onClick={printState}>Show state</button>
+            <a href="/auth/login">Already have an account?</a>
+            
         </div>
     );
 }
