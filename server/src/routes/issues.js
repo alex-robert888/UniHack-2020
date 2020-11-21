@@ -2,6 +2,10 @@ const express = require('express');
 const Contractor = require('../models/contractor_model');
 const Address = require('../models/address_model');
 const Issue = require('../models/issue_model');
+const path = require('path'); 
+
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
 
 const generate_pid = require('../utility/generate_pId');
 
@@ -31,9 +35,35 @@ router.get('/',
 */
 router.get('/byaddress/:address_pid',
     (req, res, next) => {
+
         Issue.find( {"address_pid": req.params.address_pid} )
             .then(issues => res.json(issues))
             .catch(err => next(err));
+    }
+);
+
+router.get('/bycontractor/:contractor_pid',
+    async function (req, res, next) {
+        try{
+            issues = await Issue.find();
+            console.log(issues);
+            list = [];
+            for(i in issues){
+                if (issues[i].contractor_pid == req.params.contractor_pid){
+                    list.push(issues[i]);
+                }
+                else{
+                    for(j in issues[i].applicants_list){
+                        if(issues[i].applicants_list[j].contractor_pid == req.params.contractor_pid) {
+                            list.push(issues[i]);
+                            break;
+                        }
+                    }
+                }
+            }
+            res.send(list);
+        }
+        catch(error){ next(error) }
     }
 );
 
@@ -358,5 +388,50 @@ router.put('/close/:pid', function(req, res, next){
     )
     .catch(err => next(err));
 })
+
+router.put('/sendbill/:pid', upload.single('file'), function(req, res, next){
+    Issue.findOne({ "public_id": req.params.pid })
+    .then(issue => {
+        if(!issue) res.send("Issue does not exist");
+        else{
+            if(issue.status != "solved"){
+                res.send("Issue status not solved");
+            }
+            else{
+                if(!req.file) {
+                    console.log("No file received");
+                    res.send("No file attached");
+                }
+                else{
+                    console.log(req.file.filename);
+                    issue.bill_image = req.file.filename;
+
+                    issue.save()
+                    .then(() => { res.json("File saved") })
+                    .catch(err => next(err));
+                }
+            }
+        }
+    })
+    .catch(err => next(err));
+})
+
+router.get('/getbill/:pid', function(req, res, next){
+    Issue.findOne({ "public_id": req.params.pid })
+    .then(issue => {
+        if(!issue) res.send("Issue does not exist");
+        else{
+            if (issue.bill_image == null) res.send("No bill uploaded")
+            else{
+                console.log(path.resolve("uploads/" + issue.bill_image));
+                res.contentType('image/png');
+                res.sendFile(path.resolve("uploads/" + issue.bill_image));
+            }
+        }
+    })
+    .catch(err => next(err));
+})
+
+
 
 module.exports = router;
