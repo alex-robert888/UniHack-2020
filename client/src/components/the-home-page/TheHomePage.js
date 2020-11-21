@@ -25,7 +25,6 @@ const TheHomePage = () => {
             <BaseTagStatus 
                 status="Pending"
             />
-            <AddressForm />
         </div>
     );
 }

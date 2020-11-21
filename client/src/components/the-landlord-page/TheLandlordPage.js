@@ -1,5 +1,6 @@
 import './TheLandlordPage.scss';
 import TheHeader from '../the-header/TheHeader'
+import TheLandlordAddTenant from './TheLandlordAddTenant';
 
 const TheLandlordPage = () => {
     return (
