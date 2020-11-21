@@ -8,6 +8,7 @@ const UserState = (props) => {
     const initialState = {
         userSignupData: {},
         userLoginData: {},
+        
     }
 
     const [state, dispatch] = useReducer(userReducer, initialState);

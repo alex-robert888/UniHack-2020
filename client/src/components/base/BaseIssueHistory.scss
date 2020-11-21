@@ -1,7 +1,8 @@
 .main-issue-history{
-    width: 40%;
+    width: 27.5vw;
     padding: 2vh 2vw;
-    margin: 2vh 2vw;
+    box-sizing: border-box;
+    // margin: 2vh 2vw;
     display: flex;
     flex-direction: column;
 }

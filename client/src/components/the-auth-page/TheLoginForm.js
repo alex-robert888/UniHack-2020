@@ -41,6 +41,7 @@ const TheLoginForm = () => {
         localStorage.setItem('public_id', loginData.data.public_id);
     
         history.push(`/${type}`);
+        window.location.reload(false);
     }
     catch(exception) {
         alert("MESSAGE: ", exception);
