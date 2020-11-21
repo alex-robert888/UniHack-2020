@@ -15,8 +15,7 @@ const notificationSchema = new Schema(
             required: true
         },
         sender_pid: {
-            type: String,
-            required: true
+            type: String
         },
         receiver_pid: {
             type: String,

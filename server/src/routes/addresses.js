@@ -6,6 +6,13 @@ const generate_pid = require('../utility/generate_pId');
 
 const router = express.Router();
 
+/*Return all addresses in the database
+    Requires:
+        In body:
+            -
+        In parameters:
+            -
+*/
 router.get('/',
     (req, res, next) => {
         Address.find()
@@ -14,6 +21,13 @@ router.get('/',
     }
 );
 
+/*Return all addresses of the given landlord(by pid) in the database
+    Requires:
+        In body:
+            -
+        In parameters:
+            landlord_pid: String
+*/
 router.get('/bylandlord/:landlord_pid',
     (req, res, next) => {
         Address.find( {"landlord_pid": req.params.landlord_pid} )
@@ -22,6 +36,20 @@ router.get('/bylandlord/:landlord_pid',
     }
 );
 
+/*
+Add a new address to the database
+    Requires:
+        In body:
+            "country": String
+            "city": String
+            "street": String
+            "building_number": Number
+            "unit": String
+            "apartment": Number
+            "landlord_id": String (must be existing)
+        In parameters:
+            -
+*/
 router.post('/add', async function(req, res, next){
     var exists = true;
     var new_pid;
@@ -65,6 +93,7 @@ router.post('/add', async function(req, res, next){
         .catch(err => next(err));
 });
 
+//Don't use this
 router.delete('/delete/:pid',
     (req, res, next) => {
         Address.deleteOne( {"public_id": req.params.pid} )

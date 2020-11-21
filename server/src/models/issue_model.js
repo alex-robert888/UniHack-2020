@@ -29,7 +29,7 @@ const issueSchema = new Schema(
             required: true,
             default: "open"
         },
-        address_id: {
+        address_pid: {
             type: String,
             required: true
         },
@@ -61,7 +61,7 @@ const issueSchema = new Schema(
         applicants_list: {
             type: [applicantSchema]
         },
-        contractor_id: {
+        contractor_pid: {
             type: String,
             default: null
         }

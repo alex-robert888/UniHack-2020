@@ -6,6 +6,19 @@ const Contractor = require('../models/contractor_model');
 
 const router = express.Router();
 
+
+/*Tenant login authentication
+    Requires:
+        In body:
+            "email": String
+            "password": String
+        In parameters:
+            -
+    Returns:
+        status: "success" if login valid
+        status: "failed" if login invalid
+        Error message if email not found
+*/
 router.get('/tenant', async function(req, res, next){
     const email = req.body.email;
     const password = req.body.password;
@@ -32,6 +45,7 @@ router.get('/tenant', async function(req, res, next){
     catch(error) {next(error)};
 });
 
+//Same as tenant
 router.get('/landlord', async function(req, res, next) {
     const email = req.body.email;
     const password = req.body.password;
@@ -56,9 +70,10 @@ router.get('/landlord', async function(req, res, next) {
         }
     }
     catch(error) {next(error)};
- });
+});
 
- router.get('/contractor', async function(req, res, next) {
+//Same as tenant
+router.get('/contractor', async function(req, res, next) {
     const email = req.body.email;
     const password = req.body.password;
     try{
@@ -82,6 +97,6 @@ router.get('/landlord', async function(req, res, next) {
         }
     }
     catch(error) {next(error)};
- });
+});
 
- module.exports = router;
+module.exports = router;
