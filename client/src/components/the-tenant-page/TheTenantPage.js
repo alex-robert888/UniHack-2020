@@ -4,7 +4,7 @@ import '../../style/classes.scss';
 import TheTenantPageReportIssue from './TheTenantPageReportIssue';
 import BaseIssueHistory from '../base/BaseIssueHistory';
 import LogOut from '../user-page/LogOut';
-
+import TheHeader from '../the-header/TheHeader';
 
 const TheTenantPage = () => {
     let [listIssues, setListIssues] = useState([
@@ -12,23 +12,24 @@ const TheTenantPage = () => {
     ])
 
     return (
-        <section className='glb-page main-tenant'>
-            <LogOut />
+        <div>
+            <TheHeader isLogged={true} type="tenant"/>
+            <section className='glb-page main-tenant'>
+                <div class="main-tenant-forms">
+                    <div className='left-section'>
+                        <BaseIssueHistory 
+                            listIssues={listIssues}
+                        />
+                    </div>
 
-            <div class="main-tenant-forms">
-                <div className='left-section'>
-                    <BaseIssueHistory 
-                        listIssues={listIssues}
-                    />
+                    <div className='right-section'>
+                        <TheTenantPageReportIssue 
+                            
+                        />
+                    </div>
                 </div>
-
-                <div className='right-section'>
-                    <TheTenantPageReportIssue 
-                        
-                    />
-                </div>
-            </div>
-        </section>
+            </section>
+        </div>
     );
 }
 
