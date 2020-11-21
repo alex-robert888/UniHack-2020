@@ -21,7 +21,8 @@ const TheTenantPageReportIssue = () => { // props.addressPid buttonFinishedPress
             let loginData = await axios.post(`http://localhost:5000/routes/issues/add`, {
                 address_pid: tenantByID.data.address_pid,
                 description: description,
-                title: title
+                title: title,
+                tenant_pid: sessionStorage.getItem('public_id')
             })
         }
         catch(exception) {
