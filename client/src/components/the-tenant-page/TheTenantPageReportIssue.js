@@ -25,11 +25,11 @@ const TheTenantPageReportIssue = () => { // props.addressPid buttonFinishedPress
             })
         }
         catch(exception) {
-            alert("Exception: ", exception);
             return;
         }
 
-        alert('Reported issue');
+        window.location.reload(false);
+
     }
 
     return (

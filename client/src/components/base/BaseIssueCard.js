@@ -7,11 +7,12 @@ import BaseInputText from './BaseInputText';
 
 const MAX_COUNT = 150; // take caution: issue-cards are going to be small
 
-class BaseIssueCard extends Component{ // postedDate, title, description, tag, button
+class BaseIssueCard extends Component{ // issue_pid postedDate, title, description, tag, button
     constructor(props){
         super(props);
         this.state = {
-            isExpanded: false
+            isExpanded: false,
+            price: -1
         }
         this.description_length = this.props.description.length;
     }
@@ -30,21 +31,27 @@ class BaseIssueCard extends Component{ // postedDate, title, description, tag, b
         return description.substring(0,MAX_COUNT-3).trim() + "...";
     }
 
-    changeStatusOfIssue = newStatus => { // no await
-        axios.post('http://localhost:5000/routes/issues/propose/')
-        let proposedPrice = 10;
-        const tenant_id = "";
+    proposeContractorForIssue = async newStatus => {
+        const public_id_issue = this.props.issue_pid;
         const contractor_id = sessionStorage.getItem('public_id');
-        let loginData = axios.post(`http://localhost:5000/routes/issues/propose/${tenant_id}`, {
+        try{
+        let loginData = await axios.put(`http://localhost:5000/routes/issues/apply/${public_id_issue}`, {
             contractor_pid: contractor_id,
-            price: proposedPrice
-            })
+            price: this.state.price
+        })
+        }catch(exception){
+            alert(exception);
+        }
     }
+    
 
     buttonClickHandler = () => {
+        if(this.state.price === -1 || isNaN(this.state.price)){
+            alert('Invalid price');
+        }
         if(this.props.tag === "open"){       
-            this.changeStatusOfIssue("pending");
-            // change status of issue to pending
+            this.proposeContractorForIssue();
+            
             // change the 
             // notify tenant
             // 
@@ -58,16 +65,13 @@ class BaseIssueCard extends Component{ // postedDate, title, description, tag, b
     render(){
         let description = this.state.isExpanded ? this.props.description : this.trimDescription(this.props.description);
         let public_id = sessionStorage.getItem('public_id');
-        if(!public_id){
-            alert('BAD GATEWAY');
-        }
         let whatToShow = (<BaseTagStatus className="issue-tag" status={this.props.tag}/>);
         if(this.props.tag === 'open' && public_id[0] === 'c'){
             // input field
             whatToShow = (
             <div className="glb-base-input-component glb-flex-center">
                 <label>Propose a sum:</label>
-                <BaseInputText />
+                <BaseInputText type="text" valueUpdated={price => this.setState({price: parseInt(price)})} />
             </div>)
         }
 

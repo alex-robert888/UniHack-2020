@@ -14,11 +14,9 @@ const TheTenantPage = () => {
         <div>
             <TheHeader isLogged={true} type="tenant"/>
             <section className='glb-page main-tenant'>
-                <div class="main-tenant-forms">
+                <div className="main-tenant-forms">
                     <div className='left-section'>
-                        <BaseIssueHistory 
-                            listIssues={listIssues}
-                        />
+                        <BaseIssueHistory />
                     </div>
 
                     <div className='right-section'>

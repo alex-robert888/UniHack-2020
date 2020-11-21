@@ -18,11 +18,10 @@ const TheContractorOpenIssues = () => {
 
     useEffect(async () => {
         await loadData();
-        console.log(openIssues);
         setHtmlAddresses(openIssues.map(openIssue => (
-            <div className="open-issue-card" key={openIssue.title}>
+            <div className="open-issue-card" key={openIssue._id}>
                 <BaseIssueCard
-                    
+                    issue_pid={openIssue.public_id}
                     postedDate={openIssue.date_opened} 
                     title={openIssue.title}
                     description={openIssue.description}
