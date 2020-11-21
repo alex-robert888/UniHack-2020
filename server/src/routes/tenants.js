@@ -36,6 +36,7 @@ router.get('/getbypid/:pid',
 
 router.get('/getbyaddress/:pid',
     (req, res, next) => {
+        console.log(req.params.pid);
         Tenant.find({ "address_pid": req.params.pid})
             .then(tenant => res.json(tenant))
             .catch(err => next(err));

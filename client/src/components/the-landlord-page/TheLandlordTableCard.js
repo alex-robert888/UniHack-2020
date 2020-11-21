@@ -3,9 +3,9 @@ import './TheLandlordTableCard.scss';
 import TheLandlordAddTenant from './TheLandlordAddTenant';
 import TheHeaderProfileSection from '../the-header/TheHeaderProfileSection';
 
-const TheLandlordTableCard = ({addressDescription, listOfTenants}) => { // listOfTenants(fullname, img)
+const TheLandlordTableCard = ({addressPid, addressDescription, listOfTenants}) => { // listOfTenants(fullname, img)
     const htmlListOfTenants = listOfTenants.map((tenant) => 
-        <li>
+        <li key={tenant.fullname}>
             <img src={tenant.picture} alt="profie picture" className="round-small-img" />
             <span>{tenant.fullname}</span>
         </li>
@@ -22,7 +22,7 @@ const TheLandlordTableCard = ({addressDescription, listOfTenants}) => { // listO
                     </ul>
                 </div>
                 <div className="the-landlord-table-card-main-right">
-                    <TheLandlordAddTenant />
+                    <TheLandlordAddTenant addressPid={addressPid} />
                 </div>
             </div>
         </div>

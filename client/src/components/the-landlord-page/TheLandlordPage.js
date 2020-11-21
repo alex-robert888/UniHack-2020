@@ -2,7 +2,7 @@ import './TheLandlordPage.scss';
 import TheHeader from '../the-header/TheHeader'
 import TheLandlordPageTableOfTenants from './TheLandlordTableOfTenants';
 import BaseIssueHistory from '../base/BaseIssueHistory';
-import TheLandlordAddTenant from './TheLandlordAddTenant';
+
 
 const TheLandlordPage = () => {
     return (
