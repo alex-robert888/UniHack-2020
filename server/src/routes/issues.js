@@ -97,8 +97,7 @@ router.delete('/delete/:pid',
     }
 );
 
-/*Add a new applicant to the list of applicants of the issue (by pid). Sets status to pending if it is open.
-Current status must be open or pending.
+/*Add a new applicant to the list of applicants of the issue (by pid). Current status must be open or pending
     Requires:
         In body:
             "contractor_pid": String (must be existing)
@@ -137,7 +136,6 @@ router.put('/apply/:pid', function(req, res, next){
                                     "contractor_pid": req.body.contractor_pid,
                                     "price": req.body.price
                                 });
-                                if(issue.status == "open") issue.status = "pending";
                                 msg = "Contractor application added";
                             }
 
@@ -153,22 +151,22 @@ router.put('/apply/:pid', function(req, res, next){
     .catch(err => next(err));
 })
 
-/*Accepts an application from the list of applicants of the issue (by pid). Sets status to accepted.
-Current status must be pending
+/*Propose a new applicant to be accepted from hte list of applicants of the issue (by pid). Current status must be open
     Requires:
         In body:
-            "contractor_pid": String (must be existing and in the list of applicants)
+            "contractor_pid": String (must be existing)
+            "price": Number
         In parameters:
             pid: String
 */
-router.put('/accept/:pid', function(req, res, next){
+router.put('/propose/:pid', function(req, res, next){
     Issue.findOne({ "public_id": req.params.pid })
     .then(issue => {
             if(!issue){
                 res.json("Issue does not exist");
             }
             else{
-                if(!(issue.status == "pending")) res.json('Issue status not pending');
+                if(!(issue.status == "open")) res.json('Issue status not open');
                 else{
                     Contractor.findOne({ "public_id": req.body.contractor_pid })
                     .then(contractor => {
@@ -178,15 +176,13 @@ router.put('/accept/:pid', function(req, res, next){
                             var msg = "";
                             for(i in issue.applicants_list){
                                 if (issue.applicants_list[i].contractor_pid == req.body.contractor_pid){
-                                    console.log("Existing contractor");
+                                    console.log("Existing contractor: " + contractor._id);
                                     found = true;
-                                    msg = "Contractor application accepted";
-                                    issue.status = "accepted";
+                                    msg = "Contractor proposed";
+                                    issue.status = "pending";
                                     issue.contractor_pid = req.body.contractor_pid;
                                     issue.price = issue.applicants_list[i].price;
-                                    issue.date_accepted = Date.now()
-                                    issue.applicants_list = [];
-                                    
+                                    issue.applicants_list.pull({ _id: issue.applicants_list[i]._id });
                                     break;
                                 }
                             }
@@ -205,6 +201,93 @@ router.put('/accept/:pid', function(req, res, next){
                 }
             }
     })
+    .catch(err => next(err));
+})
+
+/*Accepts a proposed application. Sets status to accepted.
+Current status must be pending
+    Requires:
+        In body:
+            -
+        In parameters:
+            pid: String
+*/
+router.put('/accept/:pid', function(req, res, next){
+    Issue.findOne({ "public_id": req.params.pid })
+    .then(issue => {
+            if(!issue){
+                res.json("Issue does not exist");
+            }
+            else{
+                if(!(issue.status == "pending")) res.json('Issue status not pending');
+                else{
+                    Contractor.findOne({ "public_id": issue.contractor_pid })
+                    .then(contractor => {
+                        if(!contractor){
+                             res.json('Contractor no longer exists');
+                             issue.contractor = null;
+                             issue.price = 0;
+                        }
+                        else{
+                            var found = false;
+                            var msg = "";
+                            if (issue.contractor_pid != null){
+                                console.log("Existing contractor");
+                                found = true;
+                                msg = "Contractor application accepted";
+                                issue.status = "accepted";
+                                issue.price = issue.applicants_list[i].price;
+                                issue.date_accepted = Date.now()
+                                issue.applicants_list = [];
+                            }
+                            else{
+                                issue.price = 0;
+                                msg = "Contractor pid is null (for some reason)";
+                            }
+
+                            if(!found){
+                                console.log("Contractor not found");
+                                msg = "Contractor not in the list of applicants";
+                            }
+
+                            issue.save()
+                                .then(() => res.json(msg))
+                                .catch(err => next(err));
+                            }
+                    })
+                    .catch(err => next(err));
+                }
+            }
+    })
+    .catch(err => next(err));
+})
+
+/*Rejects a proposed application. Sets status to open.
+Current status must be pending
+    Requires:
+        In body:
+            -
+        In parameters:
+            pid: String
+*/
+router.put('/reject/:pid', function(req, res, next){
+    Issue.findOne({ "public_id": req.params.pid })
+    .then(issue => {
+        if(!issue){
+            res.json("Issue does not exist");
+        }
+        else{
+            if(!(issue.status == "pending")) res.json('Issue status not pending');
+            else{
+                issue.contractor_pid = null;
+                issue.status = "open";
+                issue.price = 0;
+                issue.save()
+                    .then(() => res.json("Applicant rejected"))
+                    .catch(err => next(err));
+                }
+            }
+        })
     .catch(err => next(err));
 })
 
