@@ -41,7 +41,8 @@ const contractorSchema = new Schema(
     {
         public_id: {
             type: String,
-            required: true
+            required: true,
+            unique: true
         },
         email: {
             type: String,

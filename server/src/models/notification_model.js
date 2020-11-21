@@ -4,6 +4,11 @@ const Schema = mongoose.Schema;
 
 const notificationSchema = new Schema(
     {
+        public_id: {
+            type: String,
+            required: true,
+            unique: true
+        },
         type: {
             type: String,
             enum: ["client_accepted", "landlord_accepted", "invitation"],
