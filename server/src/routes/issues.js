@@ -42,6 +42,14 @@ router.get('/byaddress/:address_pid',
     }
 );
 
+router.get('/bypid/:pid',
+    (req, res, next) => {
+        Issue.findOne( {"address_pid": req.params.address_pid} )
+            .then(issue => res.json(issue))
+            .catch(err => next(err));
+    }
+);
+
 router.get('/bycontractor/:contractor_pid',
     async function (req, res, next) {
         try{
@@ -92,13 +100,15 @@ router.post('/add', function(req, res, next){
             const title = req.body.title;
             const description = req.body.description;
             const date_opened = Date.now();
+            const tenant_pid = req.body.tenant_pid;
             
             const newIssue = new Issue({
                 "public_id": public_id,
                 "address_pid": address_pid,
                 "description": description,
                 "title": title,
-                "date_opened": date_opened
+                "date_opened": date_opened,
+                "tenant_pid": tenant_pid
             });
 
             newIssue.save()
