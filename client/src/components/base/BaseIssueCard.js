@@ -5,7 +5,6 @@ import BaseTagStatus from './BaseTagStatus';
 
 const MAX_COUNT = 150; // take caution: issue-cards are going to be small
 
- // ### WORK IN PROGRESS ###
 class BaseIssueCard extends Component{ // postedDate, title, description, tag, button
     constructor(props){
         super(props);
