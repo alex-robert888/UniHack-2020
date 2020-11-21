@@ -7,7 +7,8 @@ const reviewSchema = new Schema(
         stars: {
             type: Number,
             min: 1,
-            max: 5
+            max: 5,
+            required: true
         },
         description: {
             type: String
@@ -15,7 +16,7 @@ const reviewSchema = new Schema(
         date: {
             type: Date
         },
-        sender_tenant_id: {
+        sender_tenant_pid: {
             type: String
         }
     }
@@ -80,7 +81,8 @@ const contractorSchema = new Schema(
             type: String
         },
         avg_stars: {
-            type: Number
+            type: Number,
+            default: 0
         },
         number_of_reviews: {
             type: Number,

@@ -68,6 +68,10 @@ const issueSchema = new Schema(
         contractor_pid: {
             type: String,
             default: null
+        },
+        bill_image:{
+            type: String,
+            default: null
         }
     },
     {
