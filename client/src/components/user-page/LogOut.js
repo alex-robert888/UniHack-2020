@@ -7,9 +7,10 @@ const LogOut = () => {
     let [history, setHistory] = useState(useHistory());
     
     function logOutUser() {
-        localStorage.setItem('public_id', '');
-        localStorage.setItem('fullname', '');
-        localStorage.setItem('email', '');
+        sessionStorage.setItem('public_id', '');
+        sessionStorage.setItem('fullname', '');
+        sessionStorage.setItem('email', '');
+        //
 
         history.push('/');
     }

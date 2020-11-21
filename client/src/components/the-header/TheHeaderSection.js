@@ -5,8 +5,8 @@ const TheHeaderSection = () => {
     return (
         <section>
             <nav className="">
-                <a href="#my_account" className="anchor glb-base-filled-button glb-rounded-corners">My account</a>
-                <a href="#home" className="anchor">Home</a>
+                <a href="/auth/login" className="anchor glb-base-filled-button glb-rounded-corners">My account</a>
+                <a href="/" className="anchor">Home</a>
                 <a href="#mission" className="anchor">Mission</a>
                 <a href="#about_us" className="anchor">About us</a>
             </nav>

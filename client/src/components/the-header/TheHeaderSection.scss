@@ -1,9 +1,14 @@
-.anchor {
+@import '../../style//variables//colours';
+
+.anchor:not(:first-child) {
+    color: $base-black;
+}
+
+.anchor{
     display: flex;
     flex-direction: row;
     padding: 1vh 1.2vw;
     text-decoration: inherit;
-    color: inherit;
     font-style: normal;
     display: inline;
 }
