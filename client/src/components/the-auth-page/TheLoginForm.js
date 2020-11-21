@@ -36,6 +36,7 @@ const TheLoginForm = () => {
 
         alert(loginData.data.fullname);
 
+
         localStorage.setItem('fullname', loginData.data.fullname)
         localStorage.setItem('email', email);
         localStorage.setItem('public_id', loginData.data.public_id);
