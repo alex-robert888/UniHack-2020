@@ -19,8 +19,17 @@ router.get('/',
 
 router.get('/byreceiver/:receiver_pid/:nr',
     (req, res, next) => {
-        Notification.find( {"receiver_pid": req.params.receiver_pid} )
-            .then(notifications => res.json(notifications.sort(date_posted)))
+        Notification.find( {"receiver_pid": req.params.receiver_pid} ).sort( 'field -date_posted' )
+            .then(notifications => {
+                if(req.params.nr == 0) res.json(notifications);
+                else if (req.params.nr > 0){
+                    var v = [];
+                    for(var i = 0; i < req.params.nr; i++){
+                        v.push(notifications[i]);
+                    }
+                    res.json(v);
+                }
+            })
             .catch(err => next(err));
     }
 );
@@ -69,5 +78,21 @@ router.post('/add', async function(req, res, next){
     }
     catch(error) { next(error); }
 });
+
+router.put('/mark/:pid', function (req, res, next) {
+    var msg = "";
+    Notification.findOne({ public_id: req.params.pid })
+    .then(notification => {
+        if(!notification) res.json("Notification not found");
+        else{
+            notification.seen = true;
+            
+            notification.save()
+            .then(() => res.json('Notification updated'))
+            .catch(err => next(err));
+            }
+        })
+    .catch(err => next(err));
+})
 
 module.exports = router;
