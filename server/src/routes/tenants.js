@@ -28,7 +28,7 @@ router.get('/',
 */
 router.get('/getbypid/:pid',
     (req, res, next) => {
-        Tenant.find({ "public_id": req.params.pid})
+        Tenant.findOne({ "public_id": req.params.pid})
             .then(tenant => res.json(tenant))
             .catch(err => next(err));
     }

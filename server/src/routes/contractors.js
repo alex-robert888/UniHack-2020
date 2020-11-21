@@ -33,4 +33,27 @@ router.get('/getbypid/:pid',
     }
 );
 
+router.put('/update/:pid', function (req, res, next) {
+    var msg = "";
+    Contractor.findOne({ public_id: req.params.pid })
+    .then(contractor => {
+        if(!contractor) res.json("Contractor not found");
+        else{
+            contractor.email = req.body.email;
+            contractor.password = req.body.password;
+            contractor.fullname = req.body.fullname
+            contractor.phone = req.body.phone;
+            contractor.country = req.body.country;
+            contractor.city = req.body.city;
+            contractor.date_of_birth = req.body.date_of_birth;
+            contractor.gender = req.body.gender;
+            
+            contractor.save()
+            .then(() => res.json('Contractor updated'))
+            .catch(err => next(err));
+            }
+        })
+    .catch(err => next(err));
+})
+
 module.exports = router;

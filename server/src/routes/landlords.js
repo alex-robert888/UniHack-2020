@@ -33,4 +33,27 @@ router.get('/getbypid/:pid',
     }
 );
 
+router.put('/update/:pid', function (req, res, next) {
+    var msg = "";
+    Landlord.findOne({ public_id: req.params.pid })
+    .then(landlord => {
+        if(!landlord) res.json("Landlord not found");
+        else{
+            landlord.email = req.body.email;
+            landlord.password = req.body.password;
+            landlord.fullname = req.body.fullname
+            landlord.phone = req.body.phone;
+            landlord.country = req.body.country;
+            landlord.city = req.body.city;
+            landlord.date_of_birth = req.body.date_of_birth;
+            landlord.gender = req.body.gender;
+            
+            landlord.save()
+            .then(() => res.json('Landlord updated'))
+            .catch(err => next(err));
+            }
+        })
+    .catch(err => next(err));
+})
+
 module.exports = router;

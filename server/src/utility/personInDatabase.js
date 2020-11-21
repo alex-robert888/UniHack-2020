@@ -4,43 +4,52 @@ const Contractor = require('../models/contractor_model');
 const Landlord = require('../models/landlord_model');
 const Notification = require('../models/notification_model');
 
-function personInDatabase(pid){
+async function personInDatabase(pid){
     console.log(pid);
+    try{
     if(pid.match("^t.*")){
-        Tenant.findOne({public_id: pid})
-        .then(tenant => {
-            console.log("Checking tenants");
-            if(tenant) {
-                console.log("Found");
-                return true;
-            }
-            else {
-                console.log("Not found");
-                return false;
-            }
-        })
-        .catch(err => next(err));
+        tenant = await Tenant.findOne({public_id: pid});
+        console.log("Checking tenants");
+        if(tenant) {
+            console.log("Found");
+            return true;
+        }
+        else {
+            console.log("Not found");
+            return false;
+        }
     }
+    
     else if(pid.match("^l.*")){
-        Landlord.findOne({public_id: pid})
-        .then(landlord => {
-            if(landlord) return true;
-            else return false;
-        })
-        .catch(err => next(err));
+        landlord = await Landlord.findOne({public_id: pid});
+        console.log("Checking landlords");
+        if(landlord) {
+            console.log("Found");
+            return true;
+        }
+        else {
+            console.log("Not found");
+            return false;
+        }
     }
     else if(pid.match("^c.*")){
-        Contractor.findOne({public_id: pid})
-        .then(contractor => {
-            if(contractor) return true;
-            else return false;
-        })
-        .catch(err => next(err));
+        contractor = await Contractor.findOne({public_id: pid});
+        console.log("Checking contractors");
+        if(contractor) {
+            console.log("Found");
+            return true;
+        }
+        else {
+            console.log("Not found");
+            return false;
+        }
     }
     else {
         console.log("Not in database");
         return false;
     }
+    }
+    catch(error) { next(error); }
 }
 
 module.exports = personInDatabase;
