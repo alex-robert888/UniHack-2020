@@ -3,7 +3,6 @@ import './TheTenantPage.scss';
 import '../../style/classes.scss';
 import TheTenantPageReportIssue from './TheTenantPageReportIssue';
 import BaseIssueHistory from '../base/BaseIssueHistory';
-import LogOut from '../user-page/LogOut';
 import TheHeader from '../the-header/TheHeader';
 
 const TheTenantPage = () => {

@@ -12,9 +12,9 @@ const TheHeaderSectionLogged = (props) => { // props.type: tenant,landlord or co
             <nav className="">
                 {props.type === "tenant" && (
                     <div className="the-header-options">
-                        <BaseNotificationButton />
                         <TheHeaderProfileSection />
                         <label className="the-header-public-id">({public_id})</label>
+                        <BaseNotificationButton type={props.type} />
                         <LogOut />
                     </div>
                 )}
@@ -23,6 +23,7 @@ const TheHeaderSectionLogged = (props) => { // props.type: tenant,landlord or co
                         <a href="/landlord/address" className="anchor" onClick={() => {}}>New address</a>
                         <TheHeaderProfileSection />
                         <label className="the-header-public-id">({public_id})</label>
+                        <BaseNotificationButton type={props.type} />
                         <LogOut />
                     </div>
                 )}
@@ -30,6 +31,7 @@ const TheHeaderSectionLogged = (props) => { // props.type: tenant,landlord or co
                     <div className="the-header-options">
                         <TheHeaderProfileSection />
                         <label className="the-header-public-id">({public_id})</label>
+                        <BaseNotificationButton type={props.type} />
                         <LogOut />
                     </div>
                 )}

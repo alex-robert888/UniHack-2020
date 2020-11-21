@@ -2,8 +2,6 @@
 import './TheLandlordTableOfTenants.scss';
 
 import TheLandlordTableCard from './TheLandlordTableCard';
-import TheLandlordAddTenant from './TheLandlordAddTenant';
-import defaultProfilePicture from '../../assets/img/icons/default-profile-picture.svg'
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 

@@ -29,8 +29,7 @@ const TheTenantPageReportIssue = () => { // props.addressPid buttonFinishedPress
             return;
         }
 
-        alert('Reported');
-
+        alert('Reported issue');
     }
 
     return (
@@ -39,7 +38,7 @@ const TheTenantPageReportIssue = () => { // props.addressPid buttonFinishedPress
             <BaseInputText title='title' type='text' valueUpdated={ title => setTitle(title) } />
             {/* <BaseInputText title='description' type='text' valueUpdated={ description => setDescription(description) } /> */}
             <label htmlFor="description" className="glb-base-label">DESCRIPTION</label>
-            <textarea className="textarea-report" name="description" id="" cols="30" rows="10" maxlength="350" onChange={event => setDescription(event.target.value)}></textarea>
+            <textarea className="textarea-report" name="description" id="" cols="30" rows="10" maxLength="350" onChange={event => setDescription(event.target.value)}></textarea>
             <button type="button" className="glb-base-filled-button button-report" onClick={storeNewIssue}>Report</button>
         </form>
     );
