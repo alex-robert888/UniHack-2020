@@ -28,19 +28,14 @@ router.get('/byreceiver/:receiver_pid',
 
 
 router.post('/add', function(req, res, next){
-    personInDatabase(req.body.receiver_pid)
-    .then(result => {
-        if(result) console.log("In database");
-        else console.log("Not in database");
-    })
-    .catch(err => next(err));
-    /*{
-        if(sender_pid == null || await personInDatabase(req.body.sender_pid)){
+    if(personInDatabase(req.body.receiver_pid)){
+        console.log("Inside");
+        if(sender_pid == null || personInDatabase(req.body.sender_pid)){
             var exists = true;
             var new_pid;
             while(exists){
                 new_pid = generate_pid("n");
-                exists = (await Notification.count( {"public_id" : new_pid} ) > 0);
+                exists = (Notification.count( {"public_id" : new_pid} ) > 0);
             }
 
             const public_id = new_pid;
@@ -59,7 +54,7 @@ router.post('/add', function(req, res, next){
                 "date_posted": date_posted
             });
 
-            await newIssue.save()
+            newIssue.save()
                 .then(() => res.json({
                     status: 'Issue added'
                     })  
@@ -70,7 +65,7 @@ router.post('/add', function(req, res, next){
             res.json("Sender pid not in database");
         }
     }
-    else res.json("Invalid receiver pid"); */
+    else res.json("Invalid receiver pid");
 });
 
 module.exports = router;

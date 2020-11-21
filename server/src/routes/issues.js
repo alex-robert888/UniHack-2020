@@ -42,6 +42,7 @@ router.get('/byaddress/:address_pid',
         In body:
             "address_pid": String (must be existing)
             "description": String
+            "title": String
         In parameters:
             -
 */
@@ -58,6 +59,7 @@ router.post('/add', function(req, res, next){
 
             const public_id = new_pid;
             const address_pid = req.body.address_pid;
+            const title = req.body.title;
             const description = req.body.description;
             const date_opened = Date.now();
             
@@ -65,6 +67,7 @@ router.post('/add', function(req, res, next){
                 "public_id": public_id,
                 "address_pid": address_pid,
                 "description": description,
+                "title": title,
                 "date_opened": date_opened
             });
 
