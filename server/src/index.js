@@ -34,9 +34,12 @@ app.use('/routes/addresses', addressesModule);
 
 //Initialize mongoose
 const url = "mongodb+srv://Bizso:TriduckForce@cluster0.obexd.mongodb.net/<dbname>?retryWrites=true&w=majority";
-mongoose.connect(url, { newUserParser: true, userCreateIndex: true});
+mongoose.connect(url, { useNewUrlParser: true,
+                        useUnifiedTopology: true,
+                        useCreateIndex: true
+});
 const connection = mongoose.connection;
-connection.once('open', () => console.log("MongoDB database established"))
+connection.once('open', () => console.log("MongoDB database connection established"))
 
 // Handle errors forwarded by requests
 app.use((err, req, res, next) => {
