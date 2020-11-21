@@ -23,9 +23,7 @@ const TheTenantPage = () => {
                     </div>
 
                     <div className='right-section'>
-                        <TheTenantPageReportIssue 
-                            
-                        />
+                        <TheTenantPageReportIssue />
                     </div>
                 </div>
             </section>
