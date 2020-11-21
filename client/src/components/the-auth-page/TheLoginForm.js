@@ -34,7 +34,7 @@ const TheLoginForm = () => {
             password: password  
         })
 
-        alert(loginData.data.fullname);
+        //alert(loginData.data.fullname);
         
         sessionStorage.setItem('fullname', loginData.data.fullname)
         sessionStorage.setItem('email', email);
@@ -44,7 +44,7 @@ const TheLoginForm = () => {
         window.location.reload(false);
     }
     catch(exception) {
-        alert("MESSAGE: ", exception.stack);
+        alert("Exception: ", exception.stack);
     } 
 
 

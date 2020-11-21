@@ -17,6 +17,8 @@ const TheLandlordAddTenant = (props) => { // props.addressPid - the address wher
         }catch(exception) {
             alert(exception);
         };
+
+        window.location.reload(false);
     }
 
     return (

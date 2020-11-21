@@ -5,12 +5,14 @@ import TheHeaderProfileSection from './TheHeaderProfileSection';
 
 
 const TheHeaderSectionLogged = (props) => { // props.type: tenant,landlord or contractor
+    const public_id = sessionStorage.getItem('public_id');
     return (
         <section>
             <nav className="">
                 {props.type === "tenant" && (
                     <div className="the-header-options">
                         <TheHeaderProfileSection />
+                        <label className="the-header-public-id">({public_id})</label>
                         <LogOut />
                     </div>
                 )}
@@ -18,12 +20,14 @@ const TheHeaderSectionLogged = (props) => { // props.type: tenant,landlord or co
                     <div className="the-header-options">
                         <a href="/landlord/address" className="anchor" onClick={() => {}}>New address</a>
                         <TheHeaderProfileSection />
+                        <label className="the-header-public-id">({public_id})</label>
                         <LogOut />
                     </div>
                 )}
                 {props.type === "contractor" && (
                     <div className="the-header-options">
                         <TheHeaderProfileSection />
+                        <label className="the-header-public-id">({public_id})</label>
                         <LogOut />
                     </div>
                 )}
