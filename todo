@@ -1,0 +1,19 @@
+
+-- Landlord
+* [] add address (landlord)
+* [] issue card landlord
+* [] issues history landlord
+* [] add tenant to address
+* [] table of addresses and tenants
+* [] notifications
+
+-- Contractor
+* [] issue card contractor
+* [] issues history contractor
+* [] open issues
+* [] notifications
+
+-- Tenant  
+* [] issue card tenant
+* [] issues history tenant
+* [] notifications

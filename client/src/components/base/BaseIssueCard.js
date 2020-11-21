@@ -43,6 +43,7 @@ class BaseIssueCard extends Component{ // postedDate, title, description, tag, b
                     {this.description_length > MAX_COUNT && 
                     <span className="issue-expand" onClick={this.state.isExpanded ? this.hide_issue : this.expand_issue}>{this.state.isExpanded ? "Hide" : "Expand.."}</span>}
                 </article>
+                
                 <article className="issue-card-right">
                         <span className="issue-tag">{this.props.tag}</span> 
                         <button className="issue-button glb-base-outlined-button">{this.props.button}</button>

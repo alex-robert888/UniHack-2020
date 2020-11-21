@@ -6,7 +6,7 @@ import defaultProfilePicture from '../../assets/img/icons/default-profile-pictur
 const TheHeaderProfileSection = () => {
     return (
         <article className='the-header-profile-section'>
-            <img src={defaultProfilePicture} alt="" class='profile-picture' />
+            <img src={defaultProfilePicture} alt="" className='profile-picture' />
             <span>{sessionStorage.getItem('fullname')}</span>
         </article>
     );
