@@ -1,0 +1,25 @@
+
+@import '../../style/variables/proportions';
+
+.main-tenant { 
+    display: flex;
+    justify-content: center ;
+    width: 100%;
+        .main-tenant-forms {
+        margin-top: 10vh;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        height: $height-minus-the-header;
+    }
+}
+
+.left-section{
+    //background-color: red;
+    margin-right: 10vw;
+    // width: 40vw;
+}
+
+.right-section{
+    // width: 40vw;
+}
