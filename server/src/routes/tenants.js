@@ -34,6 +34,14 @@ router.get('/getbypid/:pid',
     }
 );
 
+router.get('/getbyaddress/:pid',
+    (req, res, next) => {
+        Tenant.find({ "address_pid": req.params.pid})
+            .then(tenant => res.json(tenant))
+            .catch(err => next(err));
+    }
+);
+
 /*Update the tenant with the matching pid
     Required:
         In body:
@@ -141,7 +149,6 @@ router.put('/change_address/:pid', function (req, res, next) {
         }
     })
     .catch(err => next(err));
-})
-        
+})    
 
 module.exports = router;
