@@ -7,7 +7,7 @@ import BaseInputText from './BaseInputText';
 
 const MAX_COUNT = 150; // take caution: issue-cards are going to be small
 
-class BaseIssueCard extends Component{ // issue_pid postedDate, title, description, tag, button
+class BaseIssueCard extends Component{ // issue_pid, postedDate, title, description, tag, button
     constructor(props){
         super(props);
         this.state = {
@@ -35,10 +35,21 @@ class BaseIssueCard extends Component{ // issue_pid postedDate, title, descripti
         const public_id_issue = this.props.issue_pid;
         const contractor_id = sessionStorage.getItem('public_id');
         try{
-        let loginData = await axios.put(`http://localhost:5000/routes/issues/apply/${public_id_issue}`, {
-            contractor_pid: contractor_id,
-            price: this.state.price
-        })
+            let loginData = await axios.put(`http://localhost:5000/routes/issues/apply/${public_id_issue}`, {
+                contractor_pid: contractor_id,
+                price: this.state.price
+            })
+        }catch(exception){
+            alert(exception);
+        }
+    }
+
+    getAllApplicantsForTenant = async () => {
+        //byaddress/:address_pid
+        try{
+            return await axios.get(`http://localhost:5000/routes/issues/bypid/`, {
+
+            }) 
         }catch(exception){
             alert(exception);
         }
@@ -75,23 +86,33 @@ class BaseIssueCard extends Component{ // issue_pid postedDate, title, descripti
             </div>)
         }
 
+        const applicants =
+            (
+            <article className="issue-card-offers glb-base-container">
+                New applicant
+            </article>
+            );
+
         return (
-            <article className="issue-card glb-base-container">
-                <article className="issue-card-left">
-                    <label className="issue-posted">
-                        <span className="issue-posted-text">Posted:</span>
-                        <span className="issue-posted-date">{this.props.postedDate}</span>
-                    </label>
-                    <span className="issue-title">{this.props.title}</span>
-                    <span className="issue-description">{description}</span>
-                    {this.description_length > MAX_COUNT && 
-                    <span className="issue-expand" onClick={this.state.isExpanded ? this.hide_issue : this.expand_issue}>{this.state.isExpanded ? "Hide" : "Expand.."}</span>}
-                </article>
-                
-                <article className="issue-card-right">
+            <article>
+                <article className="issue-card glb-base-container">
+                    <article className="issue-card-left">
+                        <label className="issue-posted">
+                            <span className="issue-posted-text">Posted:</span>
+                            <span className="issue-posted-date">{this.props.postedDate}</span>
+                        </label>
+                        <span className="issue-title">{this.props.title}</span>
+                        <span className="issue-description">{description}</span>
+                        {this.description_length > MAX_COUNT && 
+                        <span className="issue-expand" onClick={this.state.isExpanded ? this.hide_issue : this.expand_issue}>{this.state.isExpanded ? "Hide" : "Expand.."}</span>}
+                    </article>
+                    
+                    <article className="issue-card-right">
                         {whatToShow}
                         <button className="issue-button glb-base-outlined-button" onClick={this.buttonClickHandler}>{this.props.button}</button>
                     </article>
+                </article>
+                {applicants}
             </article>
         );
     }
