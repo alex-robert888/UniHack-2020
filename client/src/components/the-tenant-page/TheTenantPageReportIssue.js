@@ -13,15 +13,15 @@ const TheTenantPageReportIssue = () => { // props.addressPid buttonFinishedPress
     let [history, setHistory] = useState(useHistory());
 
     async function storeNewIssue() {
-        console.log(title, description, localStorage.getItem('public_id'));
+        //console.log(title, description, localStorage.getItem('public_id'));
         try {
-            alert(sessionStorage.getItem('public_id'));
             const tenantByID = await axios.get(`http://localhost:5000/routes/tenants/getbypid/${sessionStorage.getItem('public_id')}`)
             console.log(tenantByID)
             let loginData = await axios.post(`http://localhost:5000/routes/issues/add`, {
                 address_pid: tenantByID.data.address_pid,
                 description: description,
-                title: title
+                title: title,
+                tenant_pid: localStorage.getItem('public_id')
             })
         }
         catch(exception) {

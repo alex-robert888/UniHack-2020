@@ -13,23 +13,39 @@ const TheContractorOpenIssues = () => {
         // go into the db and take all the open issues
         let allIssues = (await axios.get('http://localhost:5000/routes/issues/'));
         allIssues = allIssues.data;
-        openIssues = allIssues.filter(issue => issue.status === "open");
+        openIssues = allIssues.filter(issue => issue.status === "open" || issue.status === "pending");
     }
 
     useEffect(async () => {
         await loadData();
-        setHtmlAddresses(openIssues.map(openIssue => (
-            <div className="open-issue-card" key={openIssue._id}>
-                <BaseIssueCard
-                    issue_pid={openIssue.public_id}
-                    postedDate={openIssue.date_opened} 
-                    title={openIssue.title}
-                    description={openIssue.description}
-                    tag={openIssue.status}
-                    button="Ok"
-                />
-            </div>
-        )))
+        const public_id = sessionStorage.getItem('public_id');
+        if(public_id[0] === 't'){
+            setHtmlAddresses(openIssues.map(openIssue => (
+                <div className="open-issue-card" key={openIssue._id}>
+                    <BaseIssueCard
+                        issue_pid={openIssue.public_id}
+                        postedDate={openIssue.date_opened} 
+                        title={openIssue.title}
+                        description={openIssue.description}
+                        tag={openIssue.status}
+                        button="Ok"
+                    />
+                </div>
+            )))
+        }else if(public_id[0] === 'c'){
+            setHtmlAddresses(openIssues.map(openIssue => (
+                <div className="open-issue-card" key={openIssue._id}>
+                    <BaseIssueCard
+                        issue_pid={openIssue.public_id}
+                        postedDate={openIssue.date_opened} 
+                        title={openIssue.title}
+                        description={openIssue.description}
+                        tag="open"
+                        button="Ok"
+                    />
+                </div>
+            )))
+        }
     }, [])
 
     return (

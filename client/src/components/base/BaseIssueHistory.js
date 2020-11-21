@@ -25,12 +25,7 @@ const BaseIssueHistory = () => { // props.listIssues - list of BaseIssueCard
                 issuesList = await axios.get(`http://localhost:5000/routes/issues/byaddress/${userByID.data.address_pid}`);
             }else if(types === "contractors"){
                 // waiting
-            }
-            // alert(tenantByID.data.address_pid); CORECT
-            // toate adresele pt un landlord
-            // pentru fiecare adresa luata trebuie sa iau issuirile corespunzatoare
-            // 
-            
+            }           
             //console.log(tenanantIssuesList);
             //setIssuesList(tenanantIssuesList);
             console.log(issuesList);

@@ -62,7 +62,6 @@ class BaseIssueCard extends Component{ // issue_pid, postedDate, title, descript
 
     async componentDidMount(){
         this.setState({applicantsComponent: await this.getApplicantsComponents()});
-        this.forceUpdate();
     }
 
     acceptApplicant = async (public_id) => {
@@ -75,12 +74,13 @@ class BaseIssueCard extends Component{ // issue_pid, postedDate, title, descript
         }catch(exception){
             alert(exception);
         }
+        window.location.reload(false);
     }
 
     getApplicantsComponents = async () => {
         const applicants = await this.getAllApplicantsForTenant();
 
-        if(applicants === null){
+        if(applicants == null){
             return "";
         }
         console.log(applicants);
