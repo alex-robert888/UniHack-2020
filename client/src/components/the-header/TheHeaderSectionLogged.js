@@ -2,6 +2,7 @@ import './TheHeaderSectionLogged.scss';
 import '../../style/classes.scss';
 import LogOut from '../user-page/LogOut';
 import TheHeaderProfileSection from './TheHeaderProfileSection';
+import BaseNotificationButton from '../base/BaseNotificationButton';
 
 
 const TheHeaderSectionLogged = (props) => { // props.type: tenant,landlord or contractor
@@ -11,6 +12,7 @@ const TheHeaderSectionLogged = (props) => { // props.type: tenant,landlord or co
             <nav className="">
                 {props.type === "tenant" && (
                     <div className="the-header-options">
+                        <BaseNotificationButton />
                         <TheHeaderProfileSection />
                         <label className="the-header-public-id">({public_id})</label>
                         <LogOut />
