@@ -26,7 +26,7 @@ const notificationSchema = new Schema(
         },
         seen: {
             type: Boolean,
-            required: true
+            default: false
         },
         date_posted: {
             type: Date,
