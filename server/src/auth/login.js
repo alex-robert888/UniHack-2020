@@ -23,22 +23,19 @@ router.post('/tenant', async function(req, res, next){
     const email = req.body.email;
     const password = req.body.password;
     try{
-        tenant = await Tenant.find({ "email" : email });
+        tenant = await Tenant.find({ "email": email });
         if(!tenant[0]){
             next(new Error('Error: Email not found'));
         }
         else{
             if (tenant[0].password == password){
                 res.json({
-                    status: 'success',
-                    description: 'Password accepted'
+                    fullname: tenant[0].fullname,
+                    public_id: tenant[0].public_id
                 })
             }
             else {
-                res.json({
-                    status: 'failed',
-                    description: 'Password rejected'
-                })
+                next(new Error('Password rejected!'));
             }
         }
     }
@@ -57,12 +54,12 @@ router.post('/landlord', async function(req, res, next) {
         else{
             if (landlord[0].password == password){
                 res.json({
-                    status: 'success',
-                    description: 'Password accepted'
+                    fullname: landlord[0].fullname,
+                    public_id: landlord[0].public_id
                 })
             }
             else {
-                next(error);
+                next(new Error('Password rejected!'));
             }
         }
     }
@@ -75,7 +72,7 @@ router.post('/contractor', async function(req, res, next) {
     const password = req.body.password;
     console.log(email);
     try{
-        contractor = await Contractor.find({ "email" : email });
+        contractor = await Contractor.find({ "email": email });
         console.log(contractor);
         if(!contractor[0]){
             next(new Error('Error: Email not found'));
@@ -83,15 +80,12 @@ router.post('/contractor', async function(req, res, next) {
         else{
             if (contractor[0].password == password){
                 res.json({
-                    status: 'success',
-                    description: 'Password accepted'
+                    fullname: contractor[0].fullname,
+                    public_id: contractor[0].public_id
                 })
             }
             else {
-                res.json({
-                    status: 'failed',
-                    description: 'Password rejected'
-                })
+                next(new Error('Password rejected!'));
             }
         }
     }
