@@ -3,6 +3,8 @@ const express = require('express');
 const cors = require('cors');
 const volleyball = require('volleyball');
 const mongoose = require('mongoose');
+const morgan = require('morgan');
+const multer = require('multer');
 
 //require('dotenv').config();
 
@@ -11,6 +13,10 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use(volleyball);
+app.use(express.urlencoded({extended: true}));
+app.use(morgan('dev'));
+
+
 
 // Handle requests & routing
 app.get('/', (req, res) => {
@@ -46,6 +52,18 @@ connection.once('open', () => console.log("MongoDB database established"))
 app.use((err, req, res, next) => {
     res.status(500).send(err.message)
 })
+
+//Multer
+const storage = multer.diskStorage(
+    {
+        destination: function(req, file, callback){
+            callback(null, '/my-images')
+        },
+        filename: function(req, file, callback){
+            callback(null, file.fieldname);
+        }
+    }
+);
 
 // Listening on port 
 const port = process.env.PORT || 5000
