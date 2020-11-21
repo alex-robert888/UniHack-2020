@@ -8,6 +8,7 @@
     justify-content: space-between;
     text-align: left;
     width: 90%;
+    margin: 1.8vh auto;
 }
 
 .issue-card-left{
@@ -62,3 +63,8 @@
     margin-top: 1vh;
 }
 
+.issue-card-offers{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
