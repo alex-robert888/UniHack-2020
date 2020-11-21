@@ -20,7 +20,7 @@ const TheLoginForm = () => {
         <form>
             <BaseInputRadioButtons title='Type of account' listOfOptions={['tenant','landlord','contractor']} valueUpdated={ type => setType(type) } />
             <BaseInputText title='email' type='email' valueUpdated={ email => setEmail(email) } />
-            <BaseInputText title='password' type='text' valueUpdated={ password => setPassword(password) } />
+            <BaseInputText title='password' type='password' valueUpdated={ password => setPassword(password) } />
         </form>
     </Fragment>
     
@@ -29,13 +29,13 @@ const TheLoginForm = () => {
   async function loadDataToContext() {
     console.log(type, email, password);
     try {
-        await axios.get(`http://localhost:5000/auth/login/contractor`, {
+        await axios.post(`http://localhost:5000/auth/login/${type}`, {
             email: email,
             password: password
         })
     }
     catch(exception) {
-        alert("MESSAGE: ", exception.message);
+        alert("MESSAGE: ", exception);
     } 
     history.push(`/${type}`);
   }

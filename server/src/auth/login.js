@@ -19,7 +19,7 @@ const router = express.Router();
         status: "failed" if login invalid
         Error message if email not found
 */
-router.get('/tenant', async function(req, res, next){
+router.post('/tenant', async function(req, res, next){
     const email = req.body.email;
     const password = req.body.password;
     try{
@@ -46,11 +46,11 @@ router.get('/tenant', async function(req, res, next){
 });
 
 //Same as tenant
-router.get('/landlord', async function(req, res, next) {
+router.post('/landlord', async function(req, res, next) {
     const email = req.body.email;
     const password = req.body.password;
     try{
-        landlord = await Landlord.find({ "email" : email });
+        landlord = await Landlord.find({ "email": email });
         if(!landlord[0]){
             next(new Error('Error: Email not found'));
         }
@@ -73,11 +73,13 @@ router.get('/landlord', async function(req, res, next) {
 });
 
 //Same as tenant
-router.get('/contractor', async function(req, res, next) {
+router.post('/contractor', async function(req, res, next) {
     const email = req.body.email;
     const password = req.body.password;
+    console.log(email);
     try{
         contractor = await Contractor.find({ "email" : email });
+        console.log(contractor);
         if(!contractor[0]){
             next(new Error('Error: Email not found'));
         }
