@@ -239,7 +239,6 @@ router.put('/accept/:pid', function(req, res, next){
                                 found = true;
                                 msg = "Contractor application accepted";
                                 issue.status = "accepted";
-                                issue.price = issue.applicants_list[i].price;
                                 issue.date_accepted = Date.now()
                                 issue.applicants_list = [];
                             }
@@ -340,9 +339,19 @@ router.put('/close/:pid', function(req, res, next){
                 else{
                     issue.status = "closed";
                     issue.date_closed = Date.now();
-                    issue.save()
-                        .then(() => res.json("Issue closed"))
+                    Contractor.findOne({ "public_id": issue.contractor_pid })
+                    .then(contractor => {
+                        contractor.income_list.push({
+                            "year": issue.date_closed.getFullYear(),
+                            "month": issue.date_closed.getMonth(),
+                            "value": issue.price
+                        })
+                        issue.save()
+                        .then(contractor.save())
+                        .then(() => { res.json("Issue closed") })
                         .catch(err => next(err));
+                    })
+                    .catch(err => next(err));   
                 }
             }
         }
