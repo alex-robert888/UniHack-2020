@@ -29,15 +29,22 @@ const TheLoginForm = () => {
   async function loadDataToContext() {
     console.log(type, email, password);
     try {
-        await axios.post(`http://localhost:5000/auth/login/${type}`, {
+        let loginData = await axios.post(`http://localhost:5000/auth/login/${type}`, {
             email: email,
-            password: password
+            password: password  
         })
+
+        localStorage.setItem('fullname', loginData.data.fullname)
+        localStorage.setItem('email', loginData.data.email);
+        localStorage.setItem('', loginData.data.fullname);
+    
+        history.push(`/${type}`);
     }
     catch(exception) {
         alert("MESSAGE: ", exception);
     } 
-    history.push(`/${type}`);
+
+
   }
 
     return (

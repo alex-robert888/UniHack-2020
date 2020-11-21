@@ -62,10 +62,7 @@ router.post('/landlord', async function(req, res, next) {
                 })
             }
             else {
-                res.json({
-                    status: 'failed',
-                    description: 'Password rejected'
-                })
+                next(error);
             }
         }
     }
