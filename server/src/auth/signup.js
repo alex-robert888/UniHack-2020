@@ -3,6 +3,7 @@ const express = require('express');
 const Tenant = require('../models/tenant_model');
 const Landlord = require('../models/landlord_model');
 const Contractor = require('../models/contractor_model');
+const bcrypt = require('bcrypt');
 
 const router = express.Router();
 
