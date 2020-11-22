@@ -12,7 +12,7 @@ const TheHeader = ({isLogged, type}) => { // isLogged, type (tenant,landlord,con
 
     const goToHome = () => {
         let public_id = sessionStorage.getItem('public_id');
-        if(public_id === null){
+        if(public_id === null || public_id === ''){
             history.push("/");
         }else{
             if(public_id[0] === 't'){

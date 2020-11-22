@@ -16,14 +16,14 @@ const TheBenefitsSectionCard = ({title, text}) => {
     return (
         <section className="main-section">
             <section className="top-section">
-                <img src={img} alt={"default-"+title.toLower()}/>
+                <img src={img} alt={"default-"+title.toLowerCase()}/>
                 <span className="top-title">{title}</span>
             </section>
             <section className="middle-section">
                 <p>{text}</p>
             </section>
             <section className="bottom-section">
-                <button className="glb-base-outlined-button"></button>
+                <a href="/auth/signup"><button className="glb-base-filled-button" >Create account</button></a>
             </section>
         </section>
     );
