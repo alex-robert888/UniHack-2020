@@ -4,6 +4,7 @@ import '../../style/classes.scss';
 import BaseTagStatus from './BaseTagStatus';
 import axios from 'axios';
 import BaseInputText from './BaseInputText';
+import BaseTelephone from './BaseTelephone';
 
 const MAX_COUNT = 150; // take caution: issue-cards are going to be small
 
@@ -166,6 +167,7 @@ class BaseIssueCard extends Component{ // issue_pid, postedDate, title, descript
         let public_id = sessionStorage.getItem('public_id');
         let whatToShow = (<BaseTagStatus className="issue-tag" status={this.props.tag}/>);
         let rejectButton = '';
+        let telephoneButton = '';
 
         if(this.props.tag === 'open' && public_id[0] === 'c'){
             // input field
@@ -189,6 +191,12 @@ class BaseIssueCard extends Component{ // issue_pid, postedDate, title, descript
                 rejectButton = (<button className="issue-button glb-base-outlined-button-red" onClick={this.buttonRejectClickHandler}>Reject</button>)
             }
         }
+        else if(this.props.tag === 'accepted' && public_id[0] === 'c'){
+            // input field
+            telephoneButton = (
+
+            );
+        }
 
 
         
@@ -210,6 +218,7 @@ class BaseIssueCard extends Component{ // issue_pid, postedDate, title, descript
                         {whatToShow}
                         {this.props.button && this.props.button != '' && <button className="issue-button glb-base-outlined-button" onClick={this.buttonClickHandler}>{this.props.button}</button>}
                         {rejectButton}
+                        {telephoneButton}
                     </article>
                 </article>
                 {sessionStorage.getItem('public_id')[0] === 't' && this.state.applicantsComponent}
