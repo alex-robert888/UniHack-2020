@@ -67,11 +67,6 @@ class BaseIssueCard extends Component{ // issue_pid, postedDate, title, descript
 
     async componentDidMount(){
         this.setState({applicantsComponent: await this.getApplicantsComponents()});
-<<<<<<< HEAD
-=======
-        
-        // this.forceUpdate();
->>>>>>> d290f0de4ba091415290f4f8db4a24d4cf226a4d
     }
 
     acceptApplicant = async (public_id) => {
@@ -85,10 +80,6 @@ class BaseIssueCard extends Component{ // issue_pid, postedDate, title, descript
             alert(exception);
             return;
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> d290f0de4ba091415290f4f8db4a24d4cf226a4d
         window.location.reload(false);
     }
 
