@@ -3,6 +3,7 @@ const express = require('express');
 const Tenant = require('../models/tenant_model');
 const Landlord = require('../models/landlord_model');
 const Contractor = require('../models/contractor_model');
+const bcrypt = require('bcrypt');
 
 const router = express.Router();
 
@@ -28,7 +29,7 @@ router.post('/tenant', async function(req, res, next){
             next(new Error('Error: Email not found'));
         }
         else{
-            if (tenant[0].password == password){
+            if (await bcrypt.compare(req.body.password, tenant[0].password)){
                 res.json({
                     fullname: tenant[0].fullname,
                     public_id: tenant[0].public_id
@@ -52,7 +53,7 @@ router.post('/landlord', async function(req, res, next) {
             next(new Error('Error: Email not found'));
         }
         else{
-            if (landlord[0].password == password){
+            if (await bcrypt.compare(req.body.password, landlord[0].password)){
                 res.json({
                     fullname: landlord[0].fullname,
                     public_id: landlord[0].public_id
@@ -69,7 +70,6 @@ router.post('/landlord', async function(req, res, next) {
 //Same as tenant
 router.post('/contractor', async function(req, res, next) {
     const email = req.body.email;
-    const password = req.body.password;
     console.log(email);
     try{
         contractor = await Contractor.find({ "email": email });
@@ -78,7 +78,7 @@ router.post('/contractor', async function(req, res, next) {
             next(new Error('Error: Email not found'));
         }
         else{
-            if (contractor[0].password == password){
+            if (await bcrypt.compare(req.body.password, contractor[0].password)){
                 res.json({
                     fullname: contractor[0].fullname,
                     public_id: contractor[0].public_id

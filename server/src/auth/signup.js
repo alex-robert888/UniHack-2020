@@ -26,7 +26,7 @@ const generate_pid = require('../utility/generate_pId');
         "Tenant signup ✅" if signup successful
         Error message otherwise
 */
-router.post('/tenant', (req, res, next) => {
+router.post('/tenant', async (req, res, next) => {
     var exists = true;
     var new_pid;
     while(exists){
@@ -36,7 +36,9 @@ router.post('/tenant', (req, res, next) => {
 
     const public_id = new_pid;
     const email = req.body.email;
-    const password = req.body.password;
+
+    const password = await bcrypt.hash(req.body.password,12);
+
     const fullname = req.body.fullname;
     const phone = req.body.phone;
     const country = req.body.country;
@@ -65,7 +67,7 @@ router.post('/tenant', (req, res, next) => {
 });
 
 //Same as tenant
-router.post('/landlord', (req, res, next) => {
+router.post('/landlord', async (req, res, next) => {
     var exists = true;
     var new_pid;
     while(exists){
@@ -75,7 +77,9 @@ router.post('/landlord', (req, res, next) => {
 
     const public_id = new_pid;
     const email = req.body.email;
-    const password = req.body.password;
+
+    const password = await bcrypt.hash(req.body.password,12);
+
     const fullname = req.body.fullname;
     const phone = req.body.phone;
     const country = req.body.country;
@@ -102,7 +106,7 @@ router.post('/landlord', (req, res, next) => {
  });
 
  //Same as tenant
- router.post('/contractor', (req, res, next) => {
+ router.post('/contractor', async (req, res, next) => {
     var exists = true;
     var new_pid;
     while(exists){
@@ -112,7 +116,9 @@ router.post('/landlord', (req, res, next) => {
 
     const public_id = new_pid;
     const email = req.body.email;
-    const password = req.body.password;
+
+    const password = await bcrypt.hash(req.body.password,12);
+
     const fullname = req.body.fullname;
     const phone = req.body.phone;
     const country = req.body.country;
