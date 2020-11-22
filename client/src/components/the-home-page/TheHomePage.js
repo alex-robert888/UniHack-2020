@@ -20,8 +20,10 @@ const TheHomePage = () => {
             <TheHeader />
             <div className="glb-page">
                 <TheHeroSection />
+                <TheVideoSection />
                 <TheOurMissionSection />
             </div>
+            <TheFooter />
         </div>
     );
 }
