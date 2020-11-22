@@ -25,10 +25,21 @@ const BaseIssueHistory = () => { // props.listIssues - list of BaseIssueCard
                 issuesList = await axios.get(`http://localhost:5000/routes/issues/byaddress/${userByID.data.address_pid}`);
             }else if(types === "contractors"){
                 try {
-                    const issuesList = await axios.get(`http://localhost:5000/routes/issues/bycontractor/${public_id}`);
+                    let issuesList = await axios.get(`http://localhost:5000/routes/issues/bycontractor/${public_id}`);
+
+                    /*
+                    let issuesListMod = issuesList.data.map(issue => async () => {
+                        const poster = await axios.get(`https://localhost:5000/routes/tenants/getbypid/${issue.tenant_pid}`);
+                        alert('2');
+                        console.log(issue);
+                        console.log(poster);
+                        alert('3');
+                        return {issue: issue, phone: poster.phone};
+                    })
+                    */
 
                     setHtmlIssuesList(issuesList.data.map(issue => {
-                        let buttonMessage = 'yad yad';
+                        let buttonMessage = 'Ok';
                         console.log(issue.status);
                         if (issue.status === 'closed' && public_id[0] === 'c')
                          {
@@ -39,6 +50,10 @@ const BaseIssueHistory = () => { // props.listIssues - list of BaseIssueCard
                         }
                         else if (issue.status === 'pending' && public_id[0] === 'c') {
                             return '';
+                        }else if(issue.status === 'solved' && public_id[0] === 'c'){
+                            buttonMessage = 'paid';
+                        }else if(issue.status === 'accepted' && public_id[0] === 'c'){
+                            buttonMessage = '';
                         }
                        // console.log(buttonMessage);
                         return (
@@ -99,6 +114,7 @@ const BaseIssueHistory = () => { // props.listIssues - list of BaseIssueCard
                 postedDate={issue.createdAt} 
                 tag={issue.status}  
                 button={buttonMessage}
+                phoneNumber={issue.phoneNumberOfPoster}
             />
         )}
         ));

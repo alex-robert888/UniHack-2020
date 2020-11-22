@@ -13,7 +13,7 @@ const TheAboutUsSection = () => {
                     img_name="Boli"
                     name="Negrea Balazs"
                     short_desc="Video editing & Front-end"
-                    long_desc="Baietii joaca bine si stie fotbal."
+                    long_desc="An interesting project with a huge impact on our society.Just make it simple, with us."
                     github="https://github.com/nbalazs1337"
                     linked_in="https://www.linkedin.com/in/balazs-florin-negrea-398656197"
                     facebook="https://www.facebook.com/negrea.balazs"

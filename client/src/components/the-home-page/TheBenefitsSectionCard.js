@@ -14,7 +14,7 @@ const TheBenefitsSectionCard = ({title, text}) => {
         img = Contractor;
     }
     return (
-        <section className="main-section">
+        <section className="main-section-win glb-base-container">
             <section className="top-section">
                 <img src={img} alt={"default-"+title.toLowerCase()}/>
                 <span className="top-title">{title}</span>

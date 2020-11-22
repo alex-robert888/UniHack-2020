@@ -14,10 +14,29 @@ class BaseIssueCard extends Component{ // issue_pid, postedDate, title, descript
         this.state = {
             isExpanded: false,
             price: -1,
-            applicantsComponent: ""
+            applicantsComponent: "",
+            phoneNumber: ""
         }
         this.setState({price: this.props.price})
         this.description_length = this.props.description.length;
+    }
+
+    async loadPhoneNumberIfAcceptedAndContractor(){
+        const public_id = sessionStorage.getItem('public_id');
+        if(public_id[0] === 'c' && this.props.tag === 'accepted'){
+            try{
+                const issue = await axios.get(`http://localhost:5000/routes/issues/bypid/${this.props.issue_pid}`);
+
+                const tenant = await axios.get(`http://localhost:5000/routes/tenants/getbypid/${issue.data.tenant_pid}`);
+
+                console.log(tenant);
+                this.setState({phoneNumber: tenant.data.phone.toString()});
+
+            }catch(exc){
+                alert(exc);
+                return;
+            }
+        }
     }
 
     expand_issue = () => {
@@ -51,12 +70,10 @@ class BaseIssueCard extends Component{ // issue_pid, postedDate, title, descript
         try{
             let issue = await axios.get(`http://localhost:5000/routes/issues/bypid/${this.props.issue_pid}`)
             let applicants = issue.data.applicants_list;
-            console.log("----- APPLICANTS", applicants);
             let applicants_res = [];
             for(let idx=0;idx<applicants.length;idx++){
                 let applicant = await axios.get(`http://localhost:5000/routes/contractors/getbypid/${applicants[idx].contractor_pid}`);
                 applicants_res.push({contractor: applicant, price: applicants[idx].price});
-                console.log("AAAAAAAAAAAAAAAAA: ", applicant)
             }
             return applicants_res;
             
@@ -68,6 +85,7 @@ class BaseIssueCard extends Component{ // issue_pid, postedDate, title, descript
 
     async componentDidMount(){
         this.setState({applicantsComponent: await this.getApplicantsComponents()});
+        await this.loadPhoneNumberIfAcceptedAndContractor();
     }
 
     acceptApplicant = async (public_id) => {
@@ -127,6 +145,16 @@ class BaseIssueCard extends Component{ // issue_pid, postedDate, title, descript
         window.location.reload(false);
     }
 
+    markAsClosed = async () => {
+        try{
+            await axios.put(`http://localhost:5000/routes/issues/close/${this.props.issue_pid}`);
+        }catch(exc){
+            alert(exc);
+            return;
+        }
+        window.location.reload(false);
+    }
+
     buttonClickHandler = () => {
 
 
@@ -146,6 +174,8 @@ class BaseIssueCard extends Component{ // issue_pid, postedDate, title, descript
         }
         else if (this.props.tag === 'accepted') {
             this.markAsDone();
+        }else if(this.props.tag === 'solved'){
+            this.markAsClosed();
         }
 
         window.location.reload(false);
@@ -193,9 +223,9 @@ class BaseIssueCard extends Component{ // issue_pid, postedDate, title, descript
         }
         else if(this.props.tag === 'accepted' && public_id[0] === 'c'){
             // input field
-            // telephoneButton = (
-            //     <BaseTelephone phoneNumber={}></BaseTelephone>
-            // );
+            telephoneButton = (
+                 <BaseTelephone phoneNumber={this.state.phoneNumber}></BaseTelephone>
+            );
         }
 
 
