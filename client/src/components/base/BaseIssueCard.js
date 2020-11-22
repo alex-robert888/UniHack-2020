@@ -196,9 +196,9 @@ class BaseIssueCard extends Component{ // issue_pid, postedDate, title, descript
         }
         else if(this.props.tag === 'accepted' && public_id[0] === 'c'){
             // input field
-            telephoneButton = (
-
-            );
+            // telephoneButton = (
+            //     <BaseTelephone phoneNumber={}></BaseTelephone>
+            // );
         }
 
 
