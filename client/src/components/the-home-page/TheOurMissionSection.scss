@@ -1,0 +1,26 @@
+
+@import '../../style/variables/colours';
+
+.the-our-mission-section {
+    background-color: $base-green;
+    height: 36vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: $base-white;
+    box-sizing: border-box;
+    padding: 0 10vw;
+
+    h2 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        
+    }
+
+    h3 {
+        margin-top: 2.7vh;
+        font-size: 1.5rem;
+        width: 60%;
+        font-weight: 300;
+    }
+}
