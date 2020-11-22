@@ -40,7 +40,7 @@ const TheAboutUsSection = () => {
                     img_name="Zsolt"
                     name="Birta Zsolt"
                     short_desc="Backend"
-                    long_desc="Baietii joaca bine si stie fotbal."
+                    long_desc="'Cowards die many times before their deaths; the valiant never taste of death but once.' - William Shakespeare"
                     github="https://github.com/Bizso96"
                     linked_in="https://www.linkedin.com/in/birta-zsolt-2bb45582/"
                     facebook="https://www.facebook.com/birta.zsolt"
